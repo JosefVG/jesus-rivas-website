@@ -71,7 +71,7 @@ body{
   border-radius: 4px;
 }
 
-/* Cintillos (Modificados: Translúcidos y planos) */
+/* Cintillos transparentes */
 .jr-tags{
   position: absolute;
   z-index: 3;
@@ -91,19 +91,19 @@ body{
   text-transform: uppercase;
   color: var(--brand-white);
   border-radius: 14px;
-  box-shadow: none; /* Sin sombra de botón */
+  box-shadow: none; 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .tag-1{ 
-  background: rgba(125, 185, 166, 0.75); /* Verde azulado translúcido */
+  background: rgba(125, 185, 166, 0.75); 
 }
 .tag-2{ 
-  background: rgba(1, 35, 58, 0.75); /* Azul oscuro translúcido */
+  background: rgba(1, 35, 58, 0.75); 
 }
 
-/* Nombre vertical (Modificado: Una sola línea) */
+/* Nombre vertical  */
 .jr-vertical-name{
   position: absolute;
   right: max(60px, 7vw + env(safe-area-inset-right));
@@ -117,8 +117,8 @@ body{
   font-family: var(--title-font);
   font-size: clamp(20px, 2vw, 20px);
   user-select: none;
-  width: max-content; /* Asegura el ancho */
-  white-space: nowrap; /* Evita saltos de línea */
+  width: max-content; /* ancho ajustado */
+  white-space: nowrap; /* sin saltos de linea */  
 }
 
 /* Sin scroll global */
@@ -137,21 +137,20 @@ body{
     align-items: end; /* todo alineado abajo */
   }
 
-  /* “MI ESPACIO”: más arriba y ligeramente más pequeño */
+ 
   .jr-giant{
     left: -20vw;
-    top: 40%;                   /* más arriba */
-    font-size: clamp(7rem, 46vw, 19rem); /* un poco más pequeño */
+    top: 40%;                   
+    font-size: clamp(7rem, 46vw, 19rem); 
     opacity: .13;
   }
-
-  /* Jesús: más grande, sin espacio inferior, más a la derecha */
+ 
   .jr-portrait{
-    width: min(600px, 94vw);      /* más grande */
-    justify-self: end;            /* al lado derecho */
-    align-self: end;              /* pegado abajo */
+    width: min(600px, 94vw);     
+    justify-self: end;          
+    align-self: end;     
     margin: 0;
-    transform: translate(7vw, 0); /* lo empuja ligeramente a la derecha */
+    transform: translate(7vw, 0); 
   }
 
   /* Cintillos a la izquierda */
@@ -178,7 +177,7 @@ body{
   }
 }
 
-/* muy estrechos */
+
 @media (max-width: 380px){
   .jr-giant{ top: 42%; font-size: clamp(6.5rem, 52vw, 18rem); }
   .jr-tags{ bottom: 12vh; left: 8%; }
@@ -239,8 +238,7 @@ body{
 /* === Habilitar scroll global ahora que hay más secciones === */
 html, body { overflow-y: auto !important; }
 
-/* El hero puede seguir usando su 100vh sin afectar el scroll de la página */
-.jr-hero { overflow: clip; }  /* o 'hidden' si tu navegador no soporta 'clip' */
+.jr-hero { overflow: clip; }  
 
 
 /* =========================
@@ -263,7 +261,7 @@ html, body { overflow-y: auto !important; }
   font-weight: 400;
   font-size: clamp(28px, 4.5vw, 44px);
   letter-spacing: 0.02em;
-  margin: 0 0 clamp(64px, 6vw, 80px); /* 🔹 más espacio debajo del título */
+  margin: 0 0 clamp(64px, 6vw, 80px); 
   display: inline-block;
   position: relative;
   line-height: 1.1;
@@ -339,16 +337,14 @@ html, body { overflow-y: auto !important; }
 }
 
 /* ====== TEXTO ====== */
-/* ====== TEXTO (Sección Oscura) ====== */
+
 .about__content p {
   color: rgba(255, 255, 255, 0.92);
   font-size: clamp(14px, 1.2vw, 16.5px);
   margin: 0 0 14px;
   
-  /* --- CAMBIO REALIZADO --- */
   text-align: justify; /* Justifica el texto */
-  text-justify: inter-word; /* Mejora la distribución de espacios */
-  /* ------------------------ */
+  text-justify: inter-word; 
 }
 
 /* ====== BOTÓN CTA ====== */
@@ -417,7 +413,7 @@ html, body { overflow-y: auto !important; }
     margin-bottom: 0;
   }
 
-  /* Título centrado y subrayado centrado */
+  /* Título centrado*/
   .about__title{
     text-align: center;
     margin-bottom: 24px;
@@ -518,7 +514,7 @@ html, body { overflow-y: auto !important; }
   isolation: isolate; /* Crea un contexto para z-index */
 }
 
-/* MARCA DE AGUA GIGANTE (Tamaño ajustado) */
+/* "Visionario" marca de agua*/
 .brief__watermark {
   position: absolute;
   top: 50%;
@@ -526,10 +522,9 @@ html, body { overflow-y: auto !important; }
   transform: translate(-50%, -50%);
   font-family: var(--title-font);
   font-weight: 700;
-  /* SE AJUSTÓ EL TAMAÑO AQUÍ: */
   font-size: clamp(5rem, 14vw, 14rem); 
   color: var(--brand-deep);
-  opacity: 0.03; /* Apenas visible (3%) */
+  opacity: 0.08; /* Muy sutil */ 
   pointer-events: none;
   white-space: nowrap;
   z-index: -1; /* Detrás del texto */
@@ -552,10 +547,10 @@ html, body { overflow-y: auto !important; }
   color: var(--brand-deep);
 }
 
-/* Grid: 2 columnas iguales (quitamos la columna 'auto' del botón) */
+/*2 columnas iguales */
 .brief__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Ahora son solo 2 columnas */
+  grid-template-columns: 1fr 1fr; 
   gap: clamp(30px, 4vw, 60px);
   align-items: start;
 }
@@ -565,11 +560,11 @@ html, body { overflow-y: auto !important; }
   position: relative;
 }
 
-/* Línea divisoria elegante a la derecha de la columna 1 */
+/* Línea divisoria a la derecha de la columna 1 */
 .brief__col:first-of-type::after {
   content: "";
   position: absolute;
-  right: -30px; /* Justo en medio del gap */
+  right: -30px; 
   top: 10%;     /* No toca el borde superior */
   bottom: 10%;  /* No toca el borde inferior */
   width: 1px;
@@ -587,12 +582,10 @@ html, body { overflow-y: auto !important; }
 .brief__header i {
   font-size: 2.2rem;
   color: var(--brand-teal);
-  /* Un pequeño resplandor sutil */
   text-shadow: 0 4px 12px rgba(125, 185, 166, 0.3);
 }
 
 /* Texto */
-/* Texto (Sección Clara) */
 .brief__col p{
   margin: 0 0 16px;
   font-size: clamp(14px, 1.15vw, 16.5px);
@@ -602,12 +595,11 @@ html, body { overflow-y: auto !important; }
   /* --- CAMBIO REALIZADO --- */
   text-align: justify; /* Justifica el texto */
   text-justify: inter-word; /* Mejora la distribución */
-  /* ------------------------ */
 }
 
-/* Contenedor del botón: Ocupa todo el ancho y se centra abajo */
+/* Contenedor del botón se centra abajo */
 .brief__cta-wrap {
-  grid-column: 1 / -1; /* Hace que el contenedor abarque las 2 columnas */
+  grid-column: 1 / -1; /* el contenedor abarque las 2 columnas */
   display: flex;
   justify-content: center; /* Centra el botón horizontalmente */
   align-items: center;
@@ -620,10 +612,10 @@ html, body { overflow-y: auto !important; }
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  border-radius: 50px; /* Más redondeado, más moderno */
+  border-radius: 50px;
   background: transparent;
   color: var(--brand-deep);
-  border: 2px solid var(--brand-deep);
+  border: 2px solid var(--brand-deep); 
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
@@ -704,7 +696,7 @@ html, body { overflow-y: auto !important; }
   will-change: opacity, transform;
 }
 
-/* (opcional) ligeras direcciones para las columnas */
+
 .jr-brief .brief__col.jr-reveal:nth-of-type(1){ transform: translateY(40px); }
 .jr-brief .brief__col.jr-reveal:nth-of-type(2){ transform: translateY(40px); }
 
@@ -716,12 +708,12 @@ html, body { overflow-y: auto !important; }
 
 
 /* =========================
-   MIS LIBROS – versión mejorada sin borde blanco
+   MIS LIBROS 
    ========================= */
 .jr-books {
   background: var(--brand-white);
   color: var(--brand-deep);
-  padding: clamp(64px, 9vw, 110px) 0 80px; /* más aire inferior */
+  padding: clamp(64px, 9vw, 110px) 0 80px; 
 }
 
 .books__container {
@@ -736,7 +728,7 @@ html, body { overflow-y: auto !important; }
   text-transform: uppercase;
   font-size: clamp(28px, 4.5vw, 44px);
   letter-spacing: 0.02em;
-  margin: 0 0 clamp(48px, 5vw, 60px); /* más espacio debajo del título */
+  margin: 0 0 clamp(48px, 5vw, 60px); 
   line-height: 1.1;
   display: inline-block;
   position: relative;
@@ -792,10 +784,9 @@ html, body { overflow-y: auto !important; }
   background: transparent;
   border: none;
   
-  /* --- CAMBIO REALIZADO --- */
-  /* Agregamos un borde redondeado suave de 12px */
+
+  /* Agregamos un borde redondeado*/
   border-radius: 12px;
-  /* ------------------------ */
   
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -815,15 +806,12 @@ html, body { overflow-y: auto !important; }
   font-family: var(--body-font);
   font-weight: 700;
   
-  /* --- CAMBIO REALIZADO --- */
-  /* Aumentamos el tamaño de la fuente */
-  /* Antes: 14px - 18px */
-  /* Ahora: 18px - 22px (más grande y legible) */
+  /* pie de imagen de los libros más grandes*/
   font-size: clamp(18px, 1.5vw, 22px);
   /* ------------------------ */
 
   color: color-mix(in srgb, var(--brand-deep) 95%, #000 0%);
-  line-height: 1.3; /* Un poco de aire entre líneas si el título es largo */
+  line-height: 1.3; 
 }
 
 /* ====== ZOOM AL HACER CLICK ====== */
@@ -972,12 +960,12 @@ html, body { overflow-y: auto !important; }
   height: clamp(60px, 6vw, 70px);
   border-radius: 50%;
   background: radial-gradient(circle at center,
-    var(--brand-teal) 0%,          /* centro más brillante */
-    rgba(27, 208, 184, 0.55) 40%,  /* difusión media */
-    rgba(17, 87, 81, 0.25) 100%);  /* borde más oscuro */
+    var(--brand-teal) 0%,         
+    rgba(27, 208, 184, 0.55) 40%,  
+    rgba(17, 87, 81, 0.25) 100%);  
   box-shadow:
-    inset 0 0 35px rgba(21, 255, 220, 0.55), /* resplandor interno */
-    0 0 30px rgba(14, 160, 140, 0.35);       /* halo externo */
+    inset 0 0 35px rgba(21, 255, 220, 0.55), 
+    0 0 30px rgba(14, 160, 140, 0.35);      
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1056,7 +1044,7 @@ html, body { overflow-y: auto !important; }
 
 
 /* =========================
-   NAVBAR (Modificado para translucidez)
+   NAVBAR
    ========================= */
 .jr-nav{
   position: sticky;
@@ -1067,8 +1055,8 @@ html, body { overflow-y: auto !important; }
   justify-content: space-between;
   gap: 14px;
   padding: 12px 4%;
-  background: rgba(236, 239, 241, 0.75); /* Mismo gris (--canvas) pero translúcido */
-  backdrop-filter: blur(12px);          /* Efecto borroso */
+  background: rgba(236, 239, 241, 0.75); 
+  backdrop-filter: blur(12px);          
   -webkit-backdrop-filter: blur(12px);  /* Soporte Safari */
   border-bottom: 1px solid rgba(1,35,58,.10);
 }
@@ -1296,7 +1284,7 @@ html, body { overflow-y: auto !important; }
   transition: transform .22s ease, opacity .18s ease, width .22s ease;
 }
 
-/* Detalle pro: línea del medio más corta */
+/* línea del medio más corta */
 .jr-burger__icon span:nth-child(2){
   width: 70%;
   justify-self: end;
@@ -1417,4 +1405,104 @@ body.nav-open .jr-mobile__panel{
   .jr-nav__links{ display: none; }
   .jr-burger{ display: inline-flex; }
   .jr-nav__cta{ display: none; }
+}
+
+/* =========================
+   MODAL AVISO DE PRIVACIDAD
+   ========================= */
+.jr-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000; /* Por encima de todo */
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 20px;
+}
+
+/* Fondo oscuro general */
+.jr-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* Oscurece el resto de la web */
+  backdrop-filter: blur(4px);    /* Desenfoca levemente el fondo web */
+}
+
+
+.jr-modal__content {
+  position: relative;
+  width: min(600px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  
+  /* --- EFECTO GLASS --- */
+  background: rgba(1, 35, 58, 0.85); 
+  backdrop-filter: blur(16px);       /* Desenfoque fuerte */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Borde sutil brillante */
+  /* -------------------- */
+  
+  border-radius: 24px;
+  padding: clamp(24px, 4vw, 40px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+  color: var(--brand-white);
+  
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Estado Abierto */
+.jr-modal.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+.jr-modal.is-visible .jr-modal__content {
+  transform: translateY(0) scale(1);
+}
+
+/* Tipografía y elementos internos */
+.jr-modal__title {
+  font-family: var(--title-font);
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 24px;
+  color: var(--brand-mint); /* Color acento */
+  text-align: center;
+}
+
+.jr-modal__body p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: justify; 
+}
+
+.jr-modal__small {
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-top: 24px;
+  text-align: center !important;
+}
+
+/* Botón cerrar (X) */
+.jr-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s;
+  font-size: 18px;
+}
+.jr-modal__close:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

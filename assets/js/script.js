@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* --------------------------------------------------------
-     ANIMACIÓN FINAL - MÁS LENTA Y FLUIDA
+     ANIMACIÓN LENTA Y FLUIDA
      -------------------------------------------------------- */
 
-  // 1) "MI ESPACIO" — vuelve a su gris original
+  // 1) "MI ESPACIO" — gris
   const cssOpacity = parseFloat(getComputedStyle(giant).opacity || "1");
   setInit(giant, { opacity: 0, filter: "blur(8px)" });
   const a1 = giant.animate(
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { opacity: cssOpacity, filter: "blur(0px)" }
     ],
     {
-      duration: 2200, // más lento y elegante
+      duration: 2200, //  lento y elegante
       easing: "cubic-bezier(0.16, 1, 0.3, 1)",
       delay: 200,
       fill: "forwards"
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (prefersReduced) return;
 
-  // Elementos a animar (NO el botón)
+  // Elementos a animar 
   const briefTitle = document.querySelector(".jr-brief .brief__title");
   const briefCols  = document.querySelectorAll(".jr-brief .brief__col");
   const briefParas = document.querySelectorAll(".jr-brief .brief__col p");
@@ -285,5 +285,42 @@ document.addEventListener("DOMContentLoaded", () => {
   // Si se cambia a desktop, cerrar menú
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900 && isOpen()) setExpanded(false);
+  });
+});
+
+// ==============================
+// MODAL AVISO DE PRIVACIDAD
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal-privacy");
+  const openBtn = document.getElementById("btn-privacy");
+  
+  if (!modal || !openBtn) return;
+
+  // Función abrir
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.classList.add("is-visible");
+    document.body.style.overflow = "hidden"; // Bloquea el scroll de fondo
+  });
+
+  // Función cerrar
+  const closeModal = () => {
+    modal.classList.remove("is-visible");
+    document.body.style.overflow = ""; // Reactiva el scroll
+  };
+
+  // Cerrar con botones (X o Overlay)
+  modal.addEventListener("click", (e) => {
+    if (e.target.closest('[data-close="true"]')) {
+      closeModal();
+    }
+  });
+
+  // Cerrar con tecla ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-visible")) {
+      closeModal();
+    }
   });
 });
