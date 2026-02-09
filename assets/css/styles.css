@@ -71,7 +71,7 @@ body{
   border-radius: 4px;
 }
 
-/* Cintillos */
+/* Cintillos (Modificados: Translúcidos y planos) */
 .jr-tags{
   position: absolute;
   z-index: 3;
@@ -81,6 +81,7 @@ body{
   display: grid;
   gap: clamp(12px, 1.6vw, 20px);
 }
+
 .tag{
   display: inline-block;
   padding: clamp(12px, 1.2vw, 18px) clamp(20px, 2vw, 28px);
@@ -89,17 +90,23 @@ body{
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--brand-white);
-  background: var(--accent);
   border-radius: 14px;
-  box-shadow: 0 12px 26px rgba(1,35,58,.28);
+  box-shadow: none; /* Sin sombra de botón */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
-.tag-1{ background: var(--accent); }
-.tag-2{ background: var(--accent-strong); }
 
-/* Nombre vertical — más grande y más aire */
+.tag-1{ 
+  background: rgba(125, 185, 166, 0.75); /* Verde azulado translúcido */
+}
+.tag-2{ 
+  background: rgba(1, 35, 58, 0.75); /* Azul oscuro translúcido */
+}
+
+/* Nombre vertical (Modificado: Una sola línea) */
 .jr-vertical-name{
   position: absolute;
-  right: max(80px, 9vw + env(safe-area-inset-right)); /* ↑ aire */
+  right: max(60px, 7vw + env(safe-area-inset-right));
   top: 50%;
   transform: translateY(-50%);
   writing-mode: vertical-rl;
@@ -108,8 +115,10 @@ body{
   color: var(--brand-deep);
   opacity: .65;
   font-family: var(--title-font);
-  font-size: clamp(20px, 2vw, 20px); /* ↑ más grande */
+  font-size: clamp(20px, 2vw, 20px);
   user-select: none;
+  width: max-content; /* Asegura el ancho */
+  white-space: nowrap; /* Evita saltos de línea */
 }
 
 /* Sin scroll global */
@@ -131,7 +140,7 @@ body{
   /* “MI ESPACIO”: más arriba y ligeramente más pequeño */
   .jr-giant{
     left: -20vw;
-    top: 40%;                     /* más arriba */
+    top: 40%;                   /* más arriba */
     font-size: clamp(7rem, 46vw, 19rem); /* un poco más pequeño */
     opacity: .13;
   }
@@ -205,7 +214,7 @@ body{
 
   /* Cintillos: más grandes y más a la derecha */
   .jr-tags{
-    left: 70%;                     /* más a la derecha */
+    left: 70%;                    /* más a la derecha */
     top: 56%;
     transform: translateX(-30%);
     gap: 14px;
@@ -492,99 +501,181 @@ html, body { overflow-y: auto !important; }
 }
 
 /* =========================
-   ABOUT BRIEF / RESUMEN CLARO
+   ABOUT BRIEF / RESUMEN CLARO (NUEVO DISEÑO)
    ========================= */
 .jr-brief{
   background: var(--brand-white);
   color: var(--brand-deep);
-  padding: clamp(48px, 7vw, 96px) 0;
+  padding: clamp(64px, 9vw, 120px) 0; /* Un poco más de aire */
+  position: relative;
+  overflow: hidden; /* Para cortar la marca de agua si se sale */
+  isolation: isolate; /* Crea un contexto para z-index */
+}
+
+/* MARCA DE AGUA GIGANTE (Tamaño ajustado) */
+.brief__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--title-font);
+  font-weight: 700;
+  /* SE AJUSTÓ EL TAMAÑO AQUÍ: */
+  font-size: clamp(5rem, 14vw, 14rem); 
+  color: var(--brand-deep);
+  opacity: 0.03; /* Apenas visible (3%) */
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: -1; /* Detrás del texto */
+  user-select: none;
 }
 
 .brief__container{
   width: min(1200px, 92%);
   margin: 0 auto;
+  position: relative; /* Para estar encima de la marca de agua */
 }
 
-/* Título claro, limpio */
+/* Título */
 .brief__title{
   font-family: var(--title-font);
   font-weight: 400;
   font-size: clamp(28px, 4.5vw, 44px);
   line-height: 1.1;
-  margin: 0 0 clamp(24px, 4vw, 36px);
+  margin: 0 0 clamp(32px, 5vw, 48px);
   color: var(--brand-deep);
 }
 
-/* Grid: 2 columnas de texto + CTA a la derecha */
-.brief__grid{
+/* Grid: 2 columnas iguales (quitamos la columna 'auto' del botón) */
+.brief__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: 1fr 1fr; /* Ahora son solo 2 columnas */
+  gap: clamp(30px, 4vw, 60px);
   align-items: start;
 }
 
+/* COLUMNAS Y LÍNEA DIVISORIA */
+.brief__col {
+  position: relative;
+}
+
+/* Línea divisoria elegante a la derecha de la columna 1 */
+.brief__col:first-of-type::after {
+  content: "";
+  position: absolute;
+  right: -30px; /* Justo en medio del gap */
+  top: 10%;     /* No toca el borde superior */
+  bottom: 10%;  /* No toca el borde inferior */
+  width: 1px;
+  /* Degradado: transparente -> color -> transparente */
+  background: linear-gradient(to bottom, 
+              transparent, 
+              rgba(125, 185, 166, 0.4), 
+              transparent);
+}
+
+/* ICONOS SUPERIORES */
+.brief__header {
+  margin-bottom: 20px;
+}
+.brief__header i {
+  font-size: 2.2rem;
+  color: var(--brand-teal);
+  /* Un pequeño resplandor sutil */
+  text-shadow: 0 4px 12px rgba(125, 185, 166, 0.3);
+}
+
+/* Texto */
 .brief__col p{
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   font-size: clamp(14px, 1.15vw, 16.5px);
-  color: color-mix(in srgb, var(--brand-deep) 90%, #000 0%);
+  color: color-mix(in srgb, var(--brand-deep) 85%, #fff 0%);
+  line-height: 1.6;
 }
 
-/* CTA tipo “pill” */
-.brief__cta-wrap{
+/* Contenedor del botón: Ocupa todo el ancho y se centra abajo */
+.brief__cta-wrap {
+  grid-column: 1 / -1; /* Hace que el contenedor abarque las 2 columnas */
   display: flex;
-  align-items: start;
-  justify-content: flex-end;
+  justify-content: center; /* Centra el botón horizontalmente */
+  align-items: center;
+  margin-top: clamp(30px, 4vw, 50px); /* Espacio para separar del texto */
+  padding-top: 0;
 }
+
 .brief__cta{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 22px;
-  border-radius: 9px;
+  padding: 12px 24px;
+  border-radius: 50px; /* Más redondeado, más moderno */
   background: transparent;
   color: var(--brand-deep);
-  border: 2px solid color-mix(in srgb, var(--brand-deep) 18%, #000 0%);
+  border: 2px solid var(--brand-deep);
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform .15s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-}
-.brief__cta:hover{
-  background: color-mix(in srgb, var(--brand-deep) 6%, #fff 94%);
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  transform: translateY(-1px);
+  transition: all .2s ease;
 }
 
-/* ===== Responsive ===== */
+.brief__cta:hover{
+  background: var(--brand-deep);
+  color: var(--brand-white);
+  box-shadow: 0 6px 18px rgba(1, 35, 58, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ===== Responsive para Brief ===== */
 @media (max-width: 980px){
   .brief__grid{
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
+    gap: 40px;
   }
+  
+  /* Quitamos la línea en tablet si es necesario, o ajustamos */
+  .brief__col:first-of-type::after {
+    right: -20px;
+  }
+
   .brief__cta-wrap{
-    grid-column: 1 / -1;        /* CTA debajo en tablet */
-    justify-content: flex-start; /* a la izquierda como la referencia */
-    margin-top: 6px;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    margin-top: 20px;
   }
 }
 
-@media (max-width: 600px){
+@media (max-width: 700px){
   .brief__title{
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 30px;
   }
   .brief__grid{
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 32px;
   }
+  
+  /* En móvil, la línea divisoria vertical no tiene sentido */
+  .brief__col:first-of-type::after {
+    display: none;
+  }
+
+  .brief__header {
+    text-align: center; /* Iconos centrados en móvil */
+    margin-bottom: 12px;
+  }
+  
   .brief__col p{
-    text-align: justify;         /* legibilidad en móvil */
+    text-align: justify;
   }
+  
   .brief__cta-wrap{
-    justify-content: center;     /* botón centrado en móvil */
+    justify-content: center;
   }
+  
   .brief__cta{
-    width: max(220px, 60%);
+    width: 100%;
+    max-width: 280px;
   }
 }
 
@@ -611,7 +702,7 @@ html, body { overflow-y: auto !important; }
   transform: translateY(0);
 }
 
-/* No animar el botón: queda fuera del set jr-reveal */
+
 /* =========================
    MIS LIBROS – versión mejorada sin borde blanco
    ========================= */
@@ -684,10 +775,16 @@ html, body { overflow-y: auto !important; }
 .book img {
   display: block;
   width: 100%;
-  max-width: clamp(280px, 27vw, 300px); /* un poco más grande */
+  max-width: clamp(280px, 27vw, 300px);
   aspect-ratio: 3 / 4.3;
-  background: transparent; /* 🔹 elimina fondo blanco */
+  background: transparent;
   border: none;
+  
+  /* --- CAMBIO REALIZADO --- */
+  /* Agregamos un borde redondeado suave de 12px */
+  border-radius: 12px;
+  /* ------------------------ */
+  
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -698,14 +795,23 @@ html, body { overflow-y: auto !important; }
 }
 
 /* ====== TEXTO ====== */
+/* ====== TEXTO ====== */
 .book__caption {
-  margin-top: 18px;
-  margin-bottom: 30px; /* 🔹 más espacio inferior */
+  margin-top: 20px;
+  margin-bottom: 30px;
   text-align: center;
   font-family: var(--body-font);
   font-weight: 700;
-  font-size: clamp(14px, 1.2vw, 18px);
+  
+  /* --- CAMBIO REALIZADO --- */
+  /* Aumentamos el tamaño de la fuente */
+  /* Antes: 14px - 18px */
+  /* Ahora: 18px - 22px (más grande y legible) */
+  font-size: clamp(18px, 1.5vw, 22px);
+  /* ------------------------ */
+
   color: color-mix(in srgb, var(--brand-deep) 95%, #000 0%);
+  line-height: 1.3; /* Un poco de aire entre líneas si el título es largo */
 }
 
 /* ====== ZOOM AL HACER CLICK ====== */
@@ -938,7 +1044,7 @@ html, body { overflow-y: auto !important; }
 
 
 /* =========================
-   NAVBAR
+   NAVBAR (Modificado para translucidez)
    ========================= */
 .jr-nav{
   position: sticky;
@@ -949,8 +1055,9 @@ html, body { overflow-y: auto !important; }
   justify-content: space-between;
   gap: 14px;
   padding: 12px 4%;
-  background: color-mix(in srgb, var(--canvas) 80%, #fff 20%);
-  backdrop-filter: blur(10px);
+  background: rgba(236, 239, 241, 0.75); /* Mismo gris (--canvas) pero translúcido */
+  backdrop-filter: blur(12px);          /* Efecto borroso */
+  -webkit-backdrop-filter: blur(12px);  /* Soporte Safari */
   border-bottom: 1px solid rgba(1,35,58,.10);
 }
 
@@ -1131,7 +1238,6 @@ html, body { overflow-y: auto !important; }
 }
 
 /* ===== HAMBURGER (solo móvil) ===== */
-/* ===== HAMBURGER PREMIUM ===== */
 .jr-burger{
   display: none;
   width: 52px;
@@ -1296,7 +1402,7 @@ body.nav-open .jr-mobile__panel{
 
 /* ===== Mostrar/ocultar según ancho ===== */
 @media (max-width: 900px){
-  .jr-nav__links{ display: none; }  /* ya lo tienes, lo reafirmo */
+  .jr-nav__links{ display: none; }
   .jr-burger{ display: inline-flex; }
-  .jr-nav__cta{ display: none; }    /* opcional: ocultar CTA arriba en móvil */
+  .jr-nav__cta{ display: none; }
 }
