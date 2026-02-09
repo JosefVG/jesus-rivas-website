@@ -1,3 +1,6 @@
+HTML-----------------------------------------------------------------------------
+<!-- hola josef ya viste el cambio? -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,6 +19,64 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+
+  <!-- NAVBAR -->
+<header class="jr-nav" id="jrNav">
+  <a class="jr-nav__brand" href="#top" aria-label="Ir al inicio">JR</a>
+
+  <!-- Botón hamburguesa (solo móvil) -->
+  <button class="jr-burger" type="button"
+        aria-label="Abrir menú"
+        aria-controls="jrMobileMenu"
+        aria-expanded="false">
+    <span class="jr-burger__icon" aria-hidden="true">
+    <span></span><span></span><span></span>
+    </span>
+  </button>
+
+
+  <!-- Links desktop -->
+   <nav class="jr-nav__links" aria-label="Navegación principal">
+      <a href="#about">Quién es</a>
+      <a href="#about-brief">Sobre mí</a>
+      <a href="#books">Libros</a>
+      <a href="#contact">Contacto</a>
+   </nav>
+
+
+
+  <a class="jr-nav__cta" href="#contact">Agenda una llamada</a>
+
+  <!-- Menú móvil (panel) -->
+  <div class="jr-mobile" id="jrMobileMenu" aria-hidden="true">
+    <div class="jr-mobile__overlay" data-close="true"></div>
+
+    <div class="jr-mobile__panel" role="dialog" aria-modal="true" aria-label="Menú">
+      <div class="jr-mobile__top">
+        <span class="jr-mobile__title">Menú</span>
+        <button class="jr-mobile__close" type="button" aria-label="Cerrar menú" data-close="true">
+          ✕
+        </button>
+      </div>
+
+      <nav class="jr-mobile__links" aria-label="Navegación móvil">
+        <a href="#about">Quién es</a>
+        <a href="#about-brief">Sobre mí</a>
+        <a href="#books">Libros</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+
+
+
+      <a class="jr-mobile__cta" href="#contact">Agenda una llamada</a>
+
+    </div>
+  </div>
+</header>
+
+
+<div id="top"></div>
+
 
   <section class="jr-hero" aria-label="Portada Jesús Rivas">
     <h1 class="jr-giant" aria-hidden="true">
@@ -163,6 +224,53 @@
     </button>
     <img class="book__zoom-img" src="" alt="">
     <p class="book__zoom-title"></p>
+  </div>
+</section>
+
+
+<!-- CONTACTO -->
+<section id="contact" class="jr-section jr-contact" aria-label="Contacto">
+  <div class="jr-wrap">
+    <h2 class="jr-h2">Contacto</h2>
+    <p class="jr-lead">Cuéntame qué necesitas y te respondo con la mejor opción.</p>
+
+    <div class="jr-contact__grid">
+      <form class="jr-form" onsubmit="return false;">
+        <label>
+          Nombre
+          <input type="text" name="name" placeholder="Tu nombre" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" placeholder="tu@email.com" required />
+        </label>
+
+        <label>
+          Mensaje
+          <textarea name="message" rows="5" placeholder="¿Qué te gustaría lograr?" required></textarea>
+        </label>
+
+        <button class="jr-btn" type="submit">Enviar</button>
+        <p class="jr-note">*Este formulario es demo. Si quieres, lo conectamos con Formspree / Netlify Forms.</p>
+      </form>
+
+      <aside class="jr-contact__box">
+        <h3>Contacto directo</h3>
+        <p>Si prefieres WhatsApp, aquí tienes un acceso rápido.</p>
+
+        <!-- Reemplaza el número por el real en formato internacional -->
+        <a class="jr-btn" target="_blank" rel="noopener"
+           href="https://wa.me/521XXXXXXXXXX?text=Hola%20Jesús%2C%20quiero%20información%20sobre%20tus%20servicios.">
+          WhatsApp
+        </a>
+
+        <div class="jr-contact__mini">
+          <p><strong>Email:</strong> contacto@tudominio.com</p>
+          <p><strong>Ubicación:</strong> Monterrey, México</p>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 

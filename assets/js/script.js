@@ -227,3 +227,64 @@ document.addEventListener("DOMContentLoaded", () => {
   closeBtn.addEventListener('click', close);
   window.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
+
+// Smooth scroll para anclas internas
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+
+  const id = a.getAttribute("href");
+  if (!id || id === "#") return;
+
+  const target = document.querySelector(id);
+  if (!target) return;
+
+  e.preventDefault();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// ==============================
+// Menú hamburguesa móvil
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector(".jr-burger");
+  const mobile = document.querySelector(".jr-mobile");
+  const panel  = document.querySelector(".jr-mobile__panel");
+
+  if (!burger || !mobile || !panel) return;
+
+  const setExpanded = (isOpen) => {
+    document.body.classList.toggle("nav-open", isOpen);
+    burger.setAttribute("aria-expanded", String(isOpen));
+    mobile.setAttribute("aria-hidden", String(!isOpen));
+    burger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    // Bloquear scroll cuando está abierto
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  };
+
+  const isOpen = () => document.body.classList.contains("nav-open");
+
+  burger.addEventListener("click", () => setExpanded(!isOpen()));
+
+  // Cerrar al hacer click en overlay o botón X
+  mobile.addEventListener("click", (e) => {
+    const close = e.target.closest("[data-close='true']");
+    if (close) setExpanded(false);
+  });
+
+  // Cerrar al hacer click en un link del menú móvil
+  mobile.querySelectorAll("a[href^='#']").forEach(a => {
+    a.addEventListener("click", () => setExpanded(false));
+  });
+
+  // Cerrar con Escape
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen()) setExpanded(false);
+  });
+
+  // Si se cambia a desktop, cerrar menú
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900 && isOpen()) setExpanded(false);
+  });
+});
+
