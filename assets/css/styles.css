@@ -339,10 +339,16 @@ html, body { overflow-y: auto !important; }
 }
 
 /* ====== TEXTO ====== */
+/* ====== TEXTO (Sección Oscura) ====== */
 .about__content p {
   color: rgba(255, 255, 255, 0.92);
   font-size: clamp(14px, 1.2vw, 16.5px);
   margin: 0 0 14px;
+  
+  /* --- CAMBIO REALIZADO --- */
+  text-align: justify; /* Justifica el texto */
+  text-justify: inter-word; /* Mejora la distribución de espacios */
+  /* ------------------------ */
 }
 
 /* ====== BOTÓN CTA ====== */
@@ -586,11 +592,17 @@ html, body { overflow-y: auto !important; }
 }
 
 /* Texto */
+/* Texto (Sección Clara) */
 .brief__col p{
   margin: 0 0 16px;
   font-size: clamp(14px, 1.15vw, 16.5px);
   color: color-mix(in srgb, var(--brand-deep) 85%, #fff 0%);
   line-height: 1.6;
+  
+  /* --- CAMBIO REALIZADO --- */
+  text-align: justify; /* Justifica el texto */
+  text-justify: inter-word; /* Mejora la distribución */
+  /* ------------------------ */
 }
 
 /* Contenedor del botón: Ocupa todo el ancho y se centra abajo */
