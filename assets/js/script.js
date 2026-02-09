@@ -287,4 +287,3 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth > 900 && isOpen()) setExpanded(false);
   });
 });
-
