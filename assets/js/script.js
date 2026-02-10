@@ -326,8 +326,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==============================
-// PRELOADER
+// PRELOADER carga de la pagina 
 // ==============================
+
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   
