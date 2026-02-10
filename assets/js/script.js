@@ -214,7 +214,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   books.forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      // ✅ Si el click viene de un link/botón (Amazon), NO abras el zoom
+      if (e.target.closest('a')) return;
+
       const img   = b.querySelector('img');
       const src   = img.getAttribute('src');
       const alt   = img.getAttribute('alt');
@@ -223,9 +226,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
   overlay.addEventListener('click', close);
   closeBtn.addEventListener('click', close);
   window.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  // ✅ Cerrar si haces click en el “fondo” del zoom (no en la imagen)
+  zoom.addEventListener('click', (e) => {
+    if (e.target === zoom) close();
+  });
+
 })();
 
 // Smooth scroll para anclas internas
