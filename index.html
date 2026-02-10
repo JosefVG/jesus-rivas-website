@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <div id="preloader">
+  <div class="preloader__logo">JR</div>
+</div>
 
   <header class="jr-nav" id="jrNav">
     <a class="jr-nav__brand" href="#top" aria-label="Ir al inicio">JR</a>
@@ -33,9 +36,6 @@
       <a href="#contact">CONTACTO</a>
     </nav>
 
-
-    <a class="jr-nav__cta" href="#contact">AGENDA UNA LLAMADA</a>
-
     <div class="jr-mobile" id="jrMobileMenu" aria-hidden="true">
       <div class="jr-mobile__overlay" data-close="true"></div>
 
@@ -53,9 +53,6 @@
           <a href="#books">MIS LIBROS</a>
           <a href="#contact">CONTACTO</a>
         </nav>
-
-
-        <a class="jr-mobile__cta" href="#contact">AGENDA UNA LLAMADA</a>
 
       </div>
     </div>
@@ -100,19 +97,13 @@
             20 años de experiencia impulsando a emprendedores, líderes y empresas a
             alcanzar su máximo potencial. Es fundador de iniciativas enfocadas en
             tecnología, liderazgo y desarrollo personal, y autor del libro
-            <em>“El que tenga tienda, que la atienda”.</em> Un innovador y visionario
-            en el mundo de los negocios digitales, con una trayectoria marcada por la
-            transformación del sector B2B.
+            <em>“El que tenga tienda, que la atienda”.</em> 
           </p>
           <p>
-            Como cofundador de dos grupos empresariales de renombre, ha revolucionado
-            la manera en que las empresas operan y se comunican.
+            Como cofundador de dos grupos empresariales de renombre, he
+            revolucionado la manera en que las empresas operan y se comunican.
           </p>
-
-          <a href="#" class="about__cta" aria-label="Solicitar una consulta">
-            Solicitar una consulta
-          </a>
-        </div>
+          </div>
 
         <figure class="about__img about__img--bottom">
           <img src="assets/img/jesusyspen.png" alt="Jesús Rivas hablando" />
@@ -129,6 +120,7 @@
 
       <div class="brief__grid">
         
+        
         <div class="brief__col">
           <div class="brief__header">
             <i class="ri-user-star-line"></i>
@@ -137,20 +129,16 @@
           <p>
             <strong>Autor, empresario y conferencista</strong> innovador y visionario en el
             mundo de los negocios digitales, con una trayectoria marcada por la transformación
-            del sector 
-            <a class="jr-link" href="https://esoftpasion.com/" target="_blank" rel="noopener">B2B</a>.
-            Como cofundador de dos grupos empresariales de renombre, he
-            <a class="jr-link" href="https://nedimi.com/" target="_blank" rel="noopener">
-            revolucionado la manera en que las empresas operan y se comunican
-            </a>.
+            del sector. 
           </p>
 
             
           <p>
             Licenciado en Ciencias de la Computación por la Universidad Central de Venezuela,
-            he combinado mi pasión por la tecnología con los negocios. Mi enfoque ha sido
-            ayudar a clientes a duplicar sus ingresos mediante soluciones de software
-            avanzadas y reconocidas a nivel global.
+            he combinado mi pasión por la tecnología con los negocios.
+            Con una trayectoria marcada por la
+            innovación y la dedicación, me especializo en guiar a emprendedores y líderes
+            empresariales hacia el éxito en el mundo digital.
           </p>
         </div>
 
@@ -162,19 +150,37 @@
           <p>
             Como empresario, mi enfoque va más allá de simplemente alcanzar el éxito
             empresarial. Mi compromiso se centra en <em>transformar y elevar el mundo digital</em>
-            a través de un liderazgo visionario y humanista. Con una trayectoria marcada por la
-            innovación y la dedicación, me especializo en guiar a emprendedores y líderes
-            empresariales hacia el éxito en el mundo digital.
+            a través de un liderazgo visionario y humanista. 
+             <p>Mi enfoque ha sido ayudar a clientes a duplicar sus ingresos mediante soluciones de software
+             avanzadas y reconocidas a nivel global.</p>
+             <p> Un innovador y visionario
+            en el mundo de los negocios digitales, con una trayectoria marcada por la
+            transformación del sector B2B.
+          </p>
           </p>
           
         </div>
+        
+<div class="brief__cta-wrap">
+        <a href="#contact" class="brief__cta" aria-label="Contactar a Jesús Rivas">Contactar</a>
+      </div>
 
-        <div class="brief__cta-wrap">
-          <a href="#contact" class="brief__cta" aria-label="Contactar a Jesús Rivas">Contactar</a>
+      <div class="brief__companies">
+        <p class="brief__companies-title">COFUNDADOR DE:</p>
+        
+        <div class="brief__logos">
+          <a href="https://nedimi.com/" target="_blank" rel="noopener" class="company-link">
+            <img src="assets/img/nedimi-logo.png" alt="NEDIMI" />
+          </a>
+
+          <a href="https://esoftpasion.com/" target="_blank" rel="noopener" class="company-link">
+            <img src="assets/img/esoftpasion-logo.png" alt="eSoftPasion" />
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+      </div> </div> </section>
+
+  
 
   <section id="books" class="jr-books" aria-label="Libros de Jesús Rivas">
     <div class="books__container">
@@ -185,8 +191,10 @@
         <img src="assets/img/libro1.webp" alt="El que tenga tienda que no la tienda" loading="lazy">
         <figcaption class="book__caption">El que tenga tienda que no la tienda</figcaption>
 
-      <a class="book__cta" href="#" target="_blank" rel="noopener">
-        Ver libro
+      <a class="book__cta" 
+      href="https://www.amazon.com.mx/que-tenga-tienda-atienda-Spanish/dp/B0CGVN2NMS" 
+      target="_blank" rel="noopener">
+        Ver en Amazon
       </a>
     </figure>
 
@@ -197,7 +205,7 @@
     <a class="book__cta"
        href="https://us.amazon.com/que-tenga-tienda-pierda-familiares/dp/9689717545"
        target="_blank" rel="noopener">
-      Comprar en Amazon
+      Ver en Amazon
     </a>
   </figure>
 

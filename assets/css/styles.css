@@ -330,7 +330,7 @@ html, body { overflow-y: auto !important; }
 /* Imagen inferior */
 .about__img--bottom {
   grid-column: 2;
-  margin-top: -260px; /* 🔹 leve ajuste más natural */
+  margin-top: -350px; /* 🔹 leve ajuste más natural */
   aspect-ratio: 16/9;
   max-width: 80%;
   margin-bottom: -200px;
@@ -347,26 +347,6 @@ html, body { overflow-y: auto !important; }
   text-justify: inter-word; 
 }
 
-/* ====== BOTÓN CTA ====== */
-.about__cta {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 12px 18px;
-  border-radius: 8px;
-  background: var(--brand-teal);
-  color: var(--brand-deep);
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35),
-              0 4px 0 rgba(0, 0, 0, 0.08) inset;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
-}
-.about__cta:hover {
-  background: var(--brand-mint);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4),
-              0 4px 0 rgba(0, 0, 0, 0.06) inset;
-}
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 960px) {
@@ -517,7 +497,7 @@ html, body { overflow-y: auto !important; }
 /* "Visionario" marca de agua*/
 .brief__watermark {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--title-font);
@@ -607,26 +587,34 @@ html, body { overflow-y: auto !important; }
   padding-top: 0;
 }
 
-.brief__cta{
+/* Botón "Contactar" estilo Cristal */
+.brief__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 12px 28px;
   border-radius: 50px;
-  background: transparent;
+  
+  /* --- EFECTO CRISTAL ADAPTADO A FONDO CLARO --- */
+  background: rgba(1, 35, 58, 0.05); /* Fondo oscuro muy sutil */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(1, 35, 58, 0.2); /* Borde azul oscuro semi-transparente */
+  /* ------------------------------------------- */
+
   color: var(--brand-deep);
-  border: 2px solid var(--brand-deep); 
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
-  transition: all .2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  transition: all 0.3s ease;
 }
 
-.brief__cta:hover{
-  background: var(--brand-deep);
-  color: var(--brand-white);
-  box-shadow: 0 6px 18px rgba(1, 35, 58, 0.15);
+.brief__cta:hover {
+  background: rgba(1, 35, 58, 0.1); /* Se oscurece un poco al pasar */
+  border-color: var(--brand-deep);   /* Borde sólido */
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(1, 35, 58, 0.15); /* Sombra más pronunciada */
 }
 
 /* ===== Responsive para Brief ===== */
@@ -954,35 +942,44 @@ html, body { overflow-y: auto !important; }
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* ====== BURBUJAS DE ÍCONOS ====== */
+/* ====== BURBUJAS DE ÍCONOS (Estilo Cristal) ====== */
 .footer__icon {
   width: clamp(60px, 6vw, 70px);
   height: clamp(60px, 6vw, 70px);
-  border-radius: 50%;
-  background: radial-gradient(circle at center,
-    var(--brand-teal) 0%,         
-    rgba(27, 208, 184, 0.55) 40%,  
-    rgba(17, 87, 81, 0.25) 100%);  
-  box-shadow:
-    inset 0 0 35px rgba(21, 255, 220, 0.55), 
-    0 0 30px rgba(14, 160, 140, 0.35);      
+  border-radius: 50%; /* Mantenemos el círculo */
+  
+  /* --- EFECTO CRISTAL --- */
+  background: rgba(255, 255, 255, 0.03); /* Fondo muy sutil */
+  backdrop-filter: blur(6px);            /* Desenfoque del fondo */
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Borde fino */
+  /* ---------------------- */
+
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .footer__icon i {
-  color: var(--brand-mint); /* gris oscuro para contraste */
+  color: var(--brand-mint); /* Icono color menta */
   font-size: clamp(1.4rem, 1.8vw, 1.8rem);
+  transition: color 0.3s ease;
 }
 
+/* Efecto Hover: Se iluminan y suben */
 .footer__social-item:hover .footer__icon {
   transform: translateY(-4px);
-  box-shadow:
-    inset 0 0 40px rgba(80, 255, 230, 0.65),
-    0 0 45px rgba(60, 255, 220, 0.7);
+  background: rgba(204, 235, 210, 0.15); /* Se tiñe de menta suave */
+  border-color: var(--brand-mint);       /* Borde brillante */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.footer__social-item:hover .footer__icon i {
+  color: #fff; /* El icono se vuelve blanco para resaltar */
+  text-shadow: 0 0 10px rgba(204, 235, 210, 0.6);
 }
 
 /* ====== LINKS DE PRIVACIDAD ====== */
@@ -1046,19 +1043,20 @@ html, body { overflow-y: auto !important; }
 /* =========================
    NAVBAR
    ========================= */
-.jr-nav{
+.jr-nav {
   position: sticky;
   top: 0;
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  justify-content: space-between; /* Mantiene el Logo a la izq y Burger a la derecha */
   padding: 12px 4%;
+  
+  /* Efecto Cristal */
   background: rgba(236, 239, 241, 0.75); 
   backdrop-filter: blur(12px);          
-  -webkit-backdrop-filter: blur(12px);  /* Soporte Safari */
-  border-bottom: 1px solid rgba(1,35,58,.10);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(1, 35, 58, 0.10);
 }
 
 .jr-nav__brand{
@@ -1072,40 +1070,45 @@ html, body { overflow-y: auto !important; }
   border: 1px solid rgba(1,35,58,.12);
 }
 
-.jr-nav__links{
+/* Enlaces del Menú (Centrados Absolutamente) */
+.jr-nav__links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  gap: 30px; /* Aumenté el espacio para que se vea más elegante */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content; /* Asegura que no se estire */
+  /* ------------------------- */
 }
-
-.jr-nav__links a{
+/* Estilo de los botones (Pill + Cristal) */
+.jr-nav__links a {
   text-decoration: none;
-  color: rgba(1,35,58,.78);
+  color: var(--brand-deep);
   font-weight: 700;
-  font-size: 14px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  transition: background .2s ease, color .2s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 22px; /* Un poco más anchos */
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
-.jr-nav__links a:hover{
-  background: rgba(125,185,166,.18);
-  color: var(--brand-deep);
+.jr-nav__links a:hover {
+  background: rgba(1, 35, 58, 0.05);
+  backdrop-filter: blur(4px);
+  border-color: rgba(1, 35, 58, 0.1);
+  transform: translateY(-1px);
 }
 
-.jr-nav__cta{
-  text-decoration: none;
-  font-weight: 900;
-  color: var(--brand-deep);
-  background: var(--brand-mint);
-  padding: 10px 14px;
-  border-radius: 12px;
-  box-shadow: 0 10px 22px rgba(1,35,58,.12);
-  white-space: nowrap;
-}
-
+/* Ocultar en móvil */
 @media (max-width: 900px){
   .jr-nav__links{ display: none; }
+}
+
+/* Eliminar estilos del botón CTA anterior si quedaron residuos */
+.jr-nav__cta {
+  display: none;
 }
 
 /* =========================
@@ -1143,25 +1146,35 @@ html, body { overflow-y: auto !important; }
   margin-top: 20px;
 }
 
-.jr-btn{
+/* ====== BOTÓN PRINCIPAL (Estilo Cristal Menta) ====== */
+.jr-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
-  border-radius: 12px;
-  background: var(--brand-teal);
-  color: var(--brand-deep);
+  padding: 12px 28px; /* Un poco más ancho */
+  border-radius: 50px; /* Bordes completamente redondos (Pill) */
+  
+  /* --- EFECTO CRISTAL (Glassmorphism) --- */
+  background: rgba(204, 235, 210, 0.3); /* Tono menta muy translúcido */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Borde brillante sutil */
+  /* ------------------------------------- */
+
+  color: #ffffff; /* Texto blanco para contraste */
   font-weight: 900;
   text-decoration: none;
-  border: none;
   cursor: pointer;
-  transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
-  box-shadow: 0 14px 28px rgba(1,35,58,.14);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: all 0.3s ease;
 }
 
-.jr-btn:hover{
+.jr-btn:hover {
+  background: rgba(204, 235, 210, 0.5); /* Más visible al pasar el mouse */
+  border-color: rgba(255, 255, 255, 0.5); /* Borde más definido */
   transform: translateY(-2px);
-  filter: brightness(1.03);
+  box-shadow: 0 8px 25px rgba(204, 235, 210, 0.3); /* Resplandor menta */
+  filter: brightness(1.1);
 }
 
 .jr-btn--ghost{
@@ -1505,4 +1518,156 @@ body.nav-open .jr-mobile__panel{
 }
 .jr-modal__close:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   LOGOS DE EMPRESAS
+   ========================= */
+.brief__companies {
+  grid-column: 1 / -1; 
+  margin-top: 40px;    /* Espacio entre el botón y sección */
+  padding-top: 30px;
+  border-top: 1px solid rgba(2, 41, 67, 0.1); /* Línea divisoria  */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.brief__companies-title {
+  font-family: var(--title-font);
+  font-size: 40px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+  opacity: 80%;
+  margin: 0;
+}
+
+.brief__logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px; /* Espacio entre logos */
+  flex-wrap: wrap;
+}
+
+.company-link {
+  display: block;
+  opacity: 70%;
+  filter: grayscale(50%); /* Logos en blanco y negro por defecto */
+  transition: all 0.3s ease;
+}
+
+.company-link:hover {
+  opacity: 1;
+  filter: grayscale(0%); /* Color original al pasar el mouse */
+  transform: translateY(-2px);
+}
+
+.company-link img {
+  height: 200px; /* Altura controlada para que se vean uniformes */
+  width: auto;
+  display: block;
+}
+
+/* Ajuste móvil */
+@media (max-width: 600px) {
+  .brief__companies {
+    margin-top: 30px;
+    gap: 15px;
+  }
+  .brief__logos {
+    gap: 25px;
+  }
+  .company-link img {
+    height: 28px; /* Un poco más pequeños en móvil */
+  }
+}
+
+/* ====== BOTONES DE LIBROS (Estilo Cristal) ====== */
+.book__cta {
+  display: inline-block;
+  padding: 10px 24px;
+  margin-bottom: 10px; /* Un poco de aire abajo */
+  border-radius: 50px;
+  
+  /* --- EFECTO CRISTAL --- */
+  background: rgba(1, 35, 58, 0.05); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(1, 35, 58, 0.2); 
+  /* --------------------- */
+
+  color: var(--brand-deep);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.book__cta:hover {
+  background: rgba(1, 35, 58, 0.1); 
+  border-color: var(--brand-deep);   
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(1, 35, 58, 0.15); 
+}
+
+/* Estado Desactivado (Para el libro "Próximamente") */
+.book__cta--disabled,
+.book__cta--disabled:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(1, 35, 58, 0.4); /* Texto más claro */
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+  pointer-events: none; /* Evita clics */
+}
+
+/* =========================
+   PRELOADER (Pantalla de Carga)
+   ========================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999; /* Encima de todo */
+  background: var(--brand-deep); /* Fondo Azul Profundo */
+  display: grid;
+  place-items: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+/* El logo JR animado */
+.preloader__logo {
+  font-family: var(--title-font);
+  font-size: clamp(60px, 8vw, 80px);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--brand-mint); /* Solo el borde color menta */
+  letter-spacing: 0.1em;
+  animation: pulseLogo 1.5s infinite ease-in-out;
+}
+
+/* Animación de palpitación */
+@keyframes pulseLogo {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.95);
+    text-shadow: 0 0 0 rgba(204, 235, 210, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(204, 235, 210, 0.6); /* Brillo menta */
+  }
+}
+
+/* Clase para ocultarlo cuando termine de cargar */
+#preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

@@ -324,3 +324,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// ==============================
+// PRELOADER
+// ==============================
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  
+  if (preloader) {
+    // Pequeño delay de seguridad para que la animación se aprecie al menos un instante
+    setTimeout(() => {
+      preloader.classList.add("is-loaded");
+      document.body.style.overflow = "auto"; // Asegura que se pueda hacer scroll
+    }, 600); 
+  }
+});
