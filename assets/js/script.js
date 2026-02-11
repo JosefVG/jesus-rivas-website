@@ -298,38 +298,55 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==============================
-// MODAL AVISO DE PRIVACIDAD
+// MODALES (AVISO DE PRIVACIDAD Y POLÍTICA)
 // ==============================
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("modal-privacy");
-  const openBtn = document.getElementById("btn-privacy");
-  
-  if (!modal || !openBtn) return;
-
-  // Función abrir
-  openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    modal.classList.add("is-visible");
-    document.body.style.overflow = "hidden"; // Bloquea el scroll de fondo
-  });
-
-  // Función cerrar
-  const closeModal = () => {
-    modal.classList.remove("is-visible");
-    document.body.style.overflow = ""; // Reactiva el scroll
+  // Configuración de los modales (ID del botón : ID del modal)
+  const modalsConfig = {
+    "btn-privacy": "modal-privacy",
+    "btn-policy":  "modal-policy"
   };
 
-  // Cerrar con botones (X o Overlay)
-  modal.addEventListener("click", (e) => {
-    if (e.target.closest('[data-close="true"]')) {
-      closeModal();
+  // Función para abrir un modal específico
+  const openModal = (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add("is-visible");
+      document.body.style.overflow = "hidden"; // Bloquear scroll
+    }
+  };
+
+  // Función para cerrar cualquier modal activo
+  const closeAllModals = () => {
+    document.querySelectorAll(".jr-modal.is-visible").forEach(modal => {
+      modal.classList.remove("is-visible");
+    });
+    document.body.style.overflow = ""; // Reactivar scroll
+  };
+
+  // 1. Asignar eventos a los botones de abrir
+  Object.keys(modalsConfig).forEach(btnId => {
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(modalsConfig[btnId]);
+      });
     }
   });
 
-  // Cerrar con tecla ESC
+  // 2. Cerrar con botones (X o Overlay)
+  document.addEventListener("click", (e) => {
+    // Si el elemento clickeado tiene el atributo data-close="true"
+    if (e.target.closest('[data-close="true"]')) {
+      closeAllModals();
+    }
+  });
+
+  // 3. Cerrar con tecla ESC
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-visible")) {
-      closeModal();
+    if (e.key === "Escape") {
+      closeAllModals();
     }
   });
 });
@@ -348,4 +365,54 @@ window.addEventListener("load", () => {
       document.body.style.overflow = "auto"; // Asegura que se pueda hacer scroll
     }, 2600); 
   }
+});
+
+// ==============================
+// MODAL INFORMACIÓN DE LIBROS
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const bookModal = document.getElementById("modal-book-info");
+  const modalTitle = document.getElementById("book-modal-title");
+  const modalDesc = document.getElementById("book-modal-desc");
+  const infoBtns = document.querySelectorAll(".book__info-btn");
+
+  if (!bookModal || !infoBtns.length) return;
+
+  // Función para cerrar
+  const closeBookModal = () => {
+    bookModal.classList.remove("is-visible");
+    document.body.style.overflow = "";
+  };
+
+  // Asignar evento a cada botón de "Información"
+  infoBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // Evita que se abra el zoom de la imagen
+      
+      const title = btn.getAttribute("data-title");
+      const desc = btn.getAttribute("data-desc");
+
+      // Rellenar el modal
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+
+      // Abrir
+      bookModal.classList.add("is-visible");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  // Cerrar al dar clic en X o fondo
+  bookModal.addEventListener("click", (e) => {
+    if (e.target.closest('[data-close="true"]')) {
+      closeBookModal();
+    }
+  });
+  
+  // Cerrar con ESC
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && bookModal.classList.contains("is-visible")) {
+      closeBookModal();
+    }
+  });
 });
