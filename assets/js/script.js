@@ -346,6 +346,6 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       preloader.classList.add("is-loaded");
       document.body.style.overflow = "auto"; // Asegura que se pueda hacer scroll
-    }, 600); 
+    }, 2600); 
   }
 });

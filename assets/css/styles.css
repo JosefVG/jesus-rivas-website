@@ -27,6 +27,29 @@ body{
   overflow-x: hidden;
 }
 
+/* ===== Logo navbar: sin marco / sin fondo ===== */
+.jr-nav__brand{
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo redondeado (solo la imagen) */
+.jr-brand__img{
+  height: 50px;     /* ajusta si quieres */
+  width: auto;
+  display: block;
+  border-radius: 16px; /* 圆角 */
+}
+
+
 /* ===== HERO ===== */
 .jr-hero{
   position: relative;
@@ -36,6 +59,19 @@ body{
   padding: clamp(12px, 2.8vw, 36px);
   overflow: hidden;
 }
+
+/* HERO: fondo con degradado hacia el color del ABOUT */
+.jr-hero{
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    var(--canvas) 30%,
+    var(--canvas) 70%,
+    var(--brand-deep) 100%
+  );
+}
+
+
 
 /* Texto de fondo */
 .jr-giant{
@@ -63,6 +99,8 @@ body{
   align-self: end;
   transform: translateY(-4%); /* ↑ sube un poco */
 }
+
+
 .jr-portrait img{
   width: 100%;
   height: auto;
@@ -596,10 +634,10 @@ html, body { overflow-y: auto !important; }
   border-radius: 50px;
   
   /* --- EFECTO CRISTAL ADAPTADO A FONDO CLARO --- */
-  background: rgba(1, 35, 58, 0.05); /* Fondo oscuro muy sutil */
+  background: #fff;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(1, 35, 58, 0.2); /* Borde azul oscuro semi-transparente */
+  border: 2px solid var(--brand-deep);
   /* ------------------------------------------- */
 
   color: var(--brand-deep);
@@ -990,7 +1028,7 @@ html, body { overflow-y: auto !important; }
 }
 
 .footer__icon i {
-  color: var(--brand-mint); /* Icono color menta */
+  color:  #fff;
   font-size: clamp(1.4rem, 1.8vw, 1.8rem);
   transition: color 0.3s ease;
 }
@@ -1177,31 +1215,31 @@ html, body { overflow-y: auto !important; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px; /* Un poco más ancho */
-  border-radius: 50px; /* Bordes completamente redondos (Pill) */
-  
-  /* --- EFECTO CRISTAL (Glassmorphism) --- */
-  background: rgba(204, 235, 210, 0.3); /* Tono menta muy translúcido */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Borde brillante sutil */
-  /* ------------------------------------- */
+  padding: 12px 28px;
+  border-radius: 50px;
 
-  color: #ffffff; /* Texto blanco para contraste */
+  background: #ffffff;
+  border: 2px solid var(--brand-deep);
+  color: var(--brand-deep);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: none;
   transition: all 0.3s ease;
 }
 
 .jr-btn:hover {
-  background: rgba(204, 235, 210, 0.5); /* Más visible al pasar el mouse */
-  border-color: rgba(255, 255, 255, 0.5); /* Borde más definido */
+  background: rgba(255,255,255,.92);
+  border-color: var(--brand-deep);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(204, 235, 210, 0.3); /* Resplandor menta */
-  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(1,35,58,.12);
+  filter: none;
 }
+
 
 .jr-btn--ghost{
   background: transparent;
@@ -1620,7 +1658,7 @@ body.nav-open .jr-mobile__panel{
   border-radius: 50px;
   
   /* --- EFECTO CRISTAL --- */
-  background: rgba(1, 35, 58, 0.05); 
+  background: #fff;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(1, 35, 58, 0.2); 
@@ -1635,7 +1673,7 @@ body.nav-open .jr-mobile__panel{
 }
 
 .book__cta:hover {
-  background: rgba(1, 35, 58, 0.1); 
+  background: #fff;
   border-color: var(--brand-deep);   
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(1, 35, 58, 0.15); 
@@ -1644,7 +1682,7 @@ body.nav-open .jr-mobile__panel{
 /* Estado Desactivado (Para el libro "Próximamente") */
 .book__cta--disabled,
 .book__cta--disabled:hover {
-  background: rgba(0, 0, 0, 0.03);
+  background:#fff;
   border-color: rgba(0, 0, 0, 0.1);
   color: rgba(1, 35, 58, 0.4); /* Texto más claro */
   cursor: default;
@@ -1667,33 +1705,163 @@ body.nav-open .jr-mobile__panel{
 }
 
 /* El logo JR animado */
-.preloader__logo {
-  font-family: var(--title-font);
-  font-size: clamp(60px, 8vw, 80px);
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--brand-mint); /* Solo el borde color menta */
-  letter-spacing: 0.1em;
-  animation: pulseLogo 1.5s infinite ease-in-out;
+/* Imagen SVG del loader */
+.preloader__img{
+  width: min(160px, 42vw);   /* ajusta tamaño */
+  height: auto;
+  display: block;
+
+  /* animación suave */
+  animation: loaderPulse 1.5s infinite ease-in-out;
+  transform-origin: center;
 }
 
-/* Animación de palpitación */
-@keyframes pulseLogo {
-  0%, 100% {
-    opacity: 0.3;
+/* Animación (similar a tu pulso anterior) */
+@keyframes loaderPulse{
+  0%, 100%{
+    opacity: 0.35;
     transform: scale(0.95);
-    text-shadow: 0 0 0 rgba(204, 235, 210, 0);
+    filter: drop-shadow(0 0 0 rgba(204,235,210,0));
   }
-  50% {
+  50%{
     opacity: 1;
     transform: scale(1.05);
-    text-shadow: 0 0 20px rgba(204, 235, 210, 0.6); /* Brillo menta */
+    filter: drop-shadow(0 0 16px rgba(204,235,210,0.55));
   }
 }
+
 
 /* Clase para ocultarlo cuando termine de cargar */
 #preloader.is-loaded {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+
+/* ===== Contacto: misma tipografía que el sitio ===== */
+.jr-contact,
+.jr-contact *{
+  font-family: var(--body-font);
+}
+
+/* Títulos en Alata */
+.jr-contact .jr-h2,
+.jr-contact h3{
+  font-family: var(--title-font);
+}
+
+/* Botones y labels también consistentes */
+.jr-contact .jr-btn,
+.jr-contact label{
+  font-family: var(--body-font);
+}
+
+/* Botón Enviar + nota al lado */
+.jr-submit{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap; /* si no cabe, baja a la siguiente línea */
+}
+
+.jr-note{
+  margin: 0; /* quita margen de <p> */
+  color: rgba(255,255,255,.85);
+  font-size: 15px;
+}
+
+/* ===== Contacto directo: mejorar caja + tipografía + espaciado ===== */
+.jr-contact__box h3{
+  margin: 0 0 8px;
+  font-family: var(--title-font);
+  font-size: 22px;
+  letter-spacing: .01em;
+}
+
+.jr-contact__box p{
+  margin: 0 0 14px;
+  color: rgba(255,255,255,.85);
+}
+
+/* Botón WhatsApp: mismo estilo cristal (sin verde sólido) */
+.jr-contact__box .jr-btn{
+  width: fit-content;
+  background: rgba(255,255,255,.08);          /* cristal en fondo oscuro */
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+.jr-contact__box .jr-btn:hover{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.32);
+  box-shadow: 0 14px 32px rgba(0,0,0,.24);
+  transform: translateY(-2px);
+  filter: none;
+}
+
+/* Datos (email/ubicación) más limpios */
+.jr-contact__mini{
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.jr-contact__mini p{
+  margin: 0;
+  color: rgba(255,255,255,.88);
+  line-height: 1.35;
+}
+
+.jr-contact__mini strong{
+  color: #fff;
+}
+
+/* Evitar que el email rompa el layout en pantallas pequeñas */
+.jr-contact__mini p{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Enviar dentro del formulario: igual al botón WhatsApp */
+.jr-contact .jr-form .jr-btn{
+  width: fit-content;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.jr-contact .jr-form .jr-btn:hover{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.32);
+  box-shadow: 0 14px 32px rgba(0,0,0,.24);
+  transform: translateY(-2px);
+  filter: none;
+}
+
+
+/* Botón WhatsApp con icono */
+.jr-btn--wa{
+  gap: 10px;
+}
+
+.jr-btn--wa i{
+  font-size: 18px;
+  line-height: 0;
+}
+
+/* Footer links: Aviso de privacidad / Política en blanco */
+.footer .footer__links,
+.footer .footer__links a{
+  color: #fff !important;
+}
+
+.footer .footer__links a:hover{
+  color: #fff !important;
+  text-decoration: underline;
 }
