@@ -43,7 +43,7 @@ body{
 
 /* Logo redondeado (solo la imagen) */
 .jr-brand__img{
-  height: 50px;     
+  height: 55px;     
   width: auto;
   display: block;
   border-radius: 16px; /* 圆角 */
@@ -64,9 +64,9 @@ body{
 .jr-hero{
   background: linear-gradient(
     to bottom,
-    var(--canvas) 30%,
-    var(--canvas) 65%,
-    var(--brand-deep) 95%
+    var(--canvas) 0%,    /* Empieza claro desde arriba */
+    var(--canvas) 80%,   /* Se mantiene claro hasta el 80% de la pantalla */
+    var(--brand-deep) 100% /* Termina azul justo al final */
   ) !important;
 }
 
@@ -94,7 +94,7 @@ body{
 .jr-portrait{
   position: relative;
   z-index: 2;
-  width: min(560px, 48vw); /* ↓ más pequeña */
+  width: min(650px, 43vw); 
   filter: grayscale(100%);
   align-self: end;
   transform: translateY(-4%); /* ↑ sube un poco */
@@ -184,7 +184,7 @@ body{
   }
  
   .jr-portrait{
-    width: min(600px, 94vw);     
+    width: min(500px, 80vw);     
     justify-self: end;          
     align-self: end;     
     margin: 0;
@@ -527,6 +527,7 @@ html, body { overflow-y: auto !important; }
   background: var(--brand-white);
   color: var(--brand-deep);
   padding: clamp(64px, 9vw, 120px) 0; /* Un poco más de aire */
+  padding-bottom: 20px;
   position: relative;
   overflow: hidden; /* Para cortar la marca de agua si se sale */
   isolation: isolate; /* Crea un contexto para z-index */
@@ -610,7 +611,6 @@ html, body { overflow-y: auto !important; }
   color: color-mix(in srgb, var(--brand-deep) 85%, #fff 0%);
   line-height: 1.6;
   
-  /* --- CAMBIO REALIZADO --- */
   text-align: justify; /* Justifica el texto */
   text-justify: inter-word; /* Mejora la distribución */
 }
@@ -638,7 +638,6 @@ html, body { overflow-y: auto !important; }
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid var(--brand-deep);
-  /* ------------------------------------------- */
 
   color: var(--brand-deep);
   font-weight: 700;
@@ -1137,7 +1136,7 @@ html, body { overflow-y: auto !important; }
 /* Enlaces del Menú */
 .jr-nav__links {
   display: flex;
-  gap: 20px; 
+  gap: 15px; 
   
   position: absolute;
   left: 50%;
@@ -1149,10 +1148,10 @@ html, body { overflow-y: auto !important; }
   text-decoration: none;
   color: var(--brand-deep);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 10px 18px; 
+  letter-spacing: 0.02em;
+  padding: 9px 10px; 
   border-radius: 50px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -1170,10 +1169,36 @@ html, body { overflow-y: auto !important; }
   .jr-nav__links{ display: none; }
 }
 
-/* Eliminar estilos del botón CTA anterior si quedaron residuos */
+/* ====== BOTÓN "AGENDEMOS UNA CITA" (NAVBAR) ====== */
 .jr-nav__cta {
-  display: none;
+  /* Usamos el mismo estilo base que los enlaces del menú */
+  text-decoration: none;
+  color: var(--brand-deep);
+  font-weight: 700 !important;
+  font-size: 10px !important; /* Mismo tamaño que los otros links */
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 6px 10px !important; 
+  border-radius: 50px;
+  border: 1px solid transparent; /* Borde transparente igual que los otros */
+  transition: all 0.3s ease;
+  
+  /* Asegura posición a la derecha en escritorio */
+  margin-left: auto; 
+  display: inline-flex; 
+  white-space: nowrap;
 }
+
+/* Efecto Hover (Igual que los otros links) */
+.jr-nav__cta:hover {
+  background: rgba(1, 35, 58, 0.05);
+  backdrop-filter: blur(4px);
+  border-color: rgba(1, 35, 58, 0.1);
+  transform: translateY(-1px);
+  box-shadow: none; /* Quitamos sombras extrañas */
+}
+
+
 
 /* =========================
    SECCIONES GENERALES
@@ -1527,59 +1552,101 @@ body.nav-open .jr-burger__icon span:nth-child(3){
 }
 
 /* =========================
-   LOGOS DE EMPRESAS
+   LOGOS DE EMPRESAS Y DESCRIPCIÓN
    ========================= */
 .brief__companies {
   grid-column: 1 / -1; 
-  margin-top: 40px;    /* Espacio entre el botón y sección */
-  padding-top: 30px;
-  border-top: 1px solid rgba(2, 41, 67, 0.1); /* Línea divisoria  */
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  border-top: 1px solid rgba(2, 41, 67, 0.1);
+  border-bottom: 1px solid rgba(2, 41, 67, 0.1); /* Línea Inferior (NUEVA) */
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .brief__companies-title {
   font-family: var(--title-font);
-  font-size: 40px;
+  font-size: clamp(24px, 3vw, 40px); /* Ajuste responsive suave */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--brand-deep);
-  opacity: 80%;
+  opacity: 0.8;
   margin: 0;
 }
 
 .brief__logos {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 80px; /* Espacio entre logos */
+  align-items: flex-start; /* Alinea al top por si un texto es más largo */
+  gap: clamp(40px, 5vw, 80px); /* Espacio flexible entre empresas */
   flex-wrap: wrap;
 }
 
+/* Contenedor de cada empresa (Link) */
 .company-link {
-  display: block;
-  opacity: 90%;
-
-  transition: all 0.1s ease;
+  display: flex;
+  flex-direction: column; /* Logo arriba, texto abajo */
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  max-width: 320px; /* Limita el ancho del texto para que se vea elegante */
+  
+  opacity: 0.85; /* Un poco más visible por defecto para leer el texto */
+  transition: all 0.3s ease;
 }
 
+/* Efecto Hover */
 .company-link:hover {
   opacity: 1;
-  filter: grayscale(0%); /* Color original al pasar el mouse */
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
 
+/* Imagen del Logo */
 .company-link img {
-  height: 200px; /* Altura controlada para que se vean uniformes */
+  height: 220px; 
   width: auto;
+  object-fit: contain;
   display: block;
-  border-radius: 18px;    /* ✅ redondeo */
-  overflow: hidden;       /* por si el navegador lo requiere */
-  box-shadow: 0 12px 28px rgba(1,35,58,.12); /* opcional: sombra suave */
-  transition: transform .18s ease, box-shadow .18s ease;
+  margin-bottom: 15px; /* Espacio entre logo y texto */
+  
+  /* Filtro solo a la imagen, no al texto */
+  filter: grayscale(100%); 
+  transition: filter 0.3s ease;
+}
+
+.company-link:hover img {
+  filter: grayscale(0%); /* Color al pasar el mouse */
+}
+
+/* Nuevo Texto de Descripción */
+.company-desc {
+  font-family: var(--body-font);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--brand-deep);
+  text-align: justify;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Ajuste móvil */
+@media (max-width: 600px) {
+  .brief__companies {
+    margin-top: 40px;
+  }
+  .brief__logos {
+    gap: 40px; 
+    flex-direction: column; /* Una empresa debajo de otra en celular */
+    align-items: center;
+  }
+  .company-link img {
+    height: 120px; 
+  }
 }
 
 /* Ajuste móvil para logos */
@@ -1594,7 +1661,6 @@ body.nav-open .jr-burger__icon span:nth-child(3){
     .company-link img {
     height: 150px; 
   }
-  /* --------------------------- */
 }
 
 /* ====== BOTONES DE LIBROS (Estilo Cristal) ====== */
@@ -2444,14 +2510,6 @@ body.nav-open .jr-mobile__panel{
   padding-bottom: 0 !important;
 }
 
-/* Sube la sección "Quién es" para que se conecte con la imagen */
-.jr-about{
-  margin-top: -110px;   /* Ajusta: 80–160px según tu pantalla */
-  padding-top: calc(clamp(48px, 7vw, 96px) + 110px);
-  position: relative;
-  z-index: 1;
-}
-
 /* Asegura que la imagen quede por encima */
 .jr-portrait{
   z-index: 3;
@@ -2468,20 +2526,161 @@ body.nav-open .jr-mobile__panel{
   isolation: isolate;              /* ✅ crea un contexto para z-index */
 }
 
-/* El degradado ahora queda DETRÁS del contenido */
+/* El degradado ahora queda DETRÁS del contenido con una transición SUAVE */
 .jr-hero::before{
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;                     /* ✅ atrás */
+  z-index: -1;
   pointer-events: none;
+
 
   background: linear-gradient(
     to bottom,
-    rgba(236,239,241,.98) 0%,
-    rgba(236,239,241,.98) 55%,
-    rgba(1,35,58,.55) 78%,
-    rgba(1,35,58,1) 100%
+    rgba(236,239,241,.98) 0%,    /* Inicio claro */
+    rgba(236,239,241,.98) 65%,   /* Se mantiene claro hasta más abajo de la mitad */
+    rgba(1,35,58,1) 100%         /* Finaliza en azul oscuro suavemente */
   );
 }
 
+/* Optimización de rendimiento para la animación de salida */
+.jr-giant, 
+.jr-portrait, 
+.jr-tags, 
+.jr-vertical-name {
+  will-change: opacity, transform;
+}
+
+/* =========================
+   SECCIÓN GALERÍA (INSTAGRAM STYLE)
+   ========================= */
+.jr-gallery {
+  background: var(--brand-white);
+  padding: 50px 0 clamp(60px, 8vw, 100px) 0;
+  overflow: hidden;
+}
+
+.gallery__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 10px;
+}
+
+.gallery__title {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: clamp(28px, 4.5vw, 40px);
+  color: var(--brand-deep);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Botón del usuario (@JesusRivas) */
+.gallery__user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--brand-teal); /* Color Menta/Teal */
+  transition: color 0.3s ease;
+}
+
+.gallery__user i {
+  font-size: 22px;
+}
+
+.gallery__user:hover {
+  color: var(--brand-deep);
+}
+
+/* --- CARRUSEL --- */
+.gallery__carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Permite scroll horizontal */
+  padding-bottom: 20px; /* Espacio para la barra de scroll */
+  scroll-snap-type: x mandatory; /* Efecto magnético */
+  -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
+  
+  /* Ocultar barra de scroll (opcional, visualmente más limpio) */
+  scrollbar-width: none; /* Firefox */
+}
+
+.gallery__carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* --- ITEMS (FOTOS) --- */
+.gallery__item {
+  position: relative;
+  flex: 0 0 280px; /* Ancho fijo de cada foto */
+  aspect-ratio: 1 / 1; /* Cuadradas como Instagram */
+  border-radius: 20px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Efecto Overlay (Icono Instagram al pasar mouse) */
+.gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 35, 58, 0.4); /* Azul oscuro transparente */
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery__overlay i {
+  color: #fff;
+  font-size: 40px;
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* HOVER STATES */
+.gallery__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.1); /* Zoom suave a la foto */
+}
+
+.gallery__item:hover .gallery__overlay {
+  opacity: 1;
+}
+
+.gallery__item:hover .gallery__overlay i {
+  transform: scale(1); /* Icono aparece con "pop" */
+}
+
+/* Footer pequeño */
+.gallery__footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(1, 35, 58, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .gallery__item {
+    flex: 0 0 220px; /* Fotos un poco más chicas en celular */
+  }
+}

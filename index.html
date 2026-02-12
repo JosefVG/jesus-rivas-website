@@ -44,8 +44,8 @@
 
   <header class="jr-nav" id="jrNav">
     <a class="jr-nav__brand" href="#top" aria-label="Ir al inicio">
-  <img src="assets/img/logoJesus.png" alt="Jesús Rivas" class="jr-brand__img">
-</a>
+      <img src="assets/img/jesus vertical.png" alt="Jesús Rivas" class="jr-brand__img">
+    </a>
 
     <button class="jr-burger" type="button"
             aria-label="Abrir menú"
@@ -56,14 +56,18 @@
       </span>
     </button>
 
-
-<nav class="jr-nav__links" aria-label="Navegación principal">
+    <nav class="jr-nav__links" aria-label="Navegación principal">
       <a href="#about">¿QUIÉN ES?</a>
       <a href="#about-brief">SOBRE MÍ</a>
+      <a href="#cofundador">COFUNDADOR</a>
+      <a href="#gallery">GALERÍA</a>
       <a href="#books">MIS LIBROS</a>
       <a href="#contact">CONTACTO</a>
       <a href="#social-section">REDES SOCIALES</a>
+      <a href="#contact" class="jr-nav__cta"> CONSULTORÍA Y MENTORÍA </a>
     </nav>
+
+
 
     <div class="jr-mobile" id="jrMobileMenu" aria-hidden="true">
       <div class="jr-mobile__overlay" data-close="true"></div>
@@ -76,14 +80,16 @@
           </button>
         </div>
 
-     <nav class="jr-mobile__links" aria-label="Navegación móvil">
+        <nav class="jr-mobile__links" aria-label="Navegación móvil">
           <a href="#about">¿QUIÉN ES?</a>
           <a href="#about-brief">SOBRE MÍ</a>
+          <a href="#cofundador">COFUNDADOR</a>
+          <a href="#gallery">GALERÍA</a>
           <a href="#books">MIS LIBROS</a>
           <a href="#contact">CONTACTO</a>
           <a href="#social-section">REDES SOCIALES</a>
-        </nav>
-        
+          <a href="#contact">CONSULTORÍA Y MENTORÍA</a>       
+         </nav>
       </div>
     </div>
   </header>
@@ -195,20 +201,71 @@
         <a href="#contact" class="brief__cta" aria-label="Contactar a Jesús Rivas">Contactar</a>
       </div>
 
-      <div class="brief__companies">
+      <div class="brief__companies" id="cofundador">
         <p class="brief__companies-title">COFUNDADOR DE:</p>
         
         <div class="brief__logos">
           <a href="https://nedimi.com/" target="_blank" rel="noopener" class="company-link">
             <img src="assets/img/nedimi-logo.png" alt="NEDIMI" />
+            <p class="company-desc">
+              Consultoría estratégica y soluciones tecnológicas integrales 
+              para impulsar la transformación digital de las empresas.
+            </p>
           </a>
 
           <a href="https://esoftpasion.com/" target="_blank" rel="noopener" class="company-link">
             <img src="assets/img/esoftpasion-logo.png" alt="eSoftPasion" />
+            <p class="company-desc">
+              Desarrollo de software a la medida con un enfoque innovador, 
+              creando herramientas digitales de alto impacto.
+            </p>
           </a>
         </div>
       </div>
       </div> </div> </section>
+
+      <section id="gallery" class="jr-gallery" aria-label="Galería de Instagram">
+    <div class="jr-wrap">
+      
+      <div class="gallery__header">
+        <h2 class="gallery__title">Galería</h2>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__user">
+          <i class="ri-instagram-line"></i> @JesusRivas
+        </a>
+      </div>
+
+      <div class="gallery__carousel">
+        
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/maxwellyjesus.jpg" alt="Evento Jesús Rivas" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusyspen.png" alt="Conferencia" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusalexis.png" alt="Mentoria" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/maxwellyjesus.jpg" alt="Networking" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusyspen.png" alt="Lifestyle" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+      </div>
+      
+      <p class="gallery__footer">Sígueme para más contenido exclusivo</p>
+    </div>
+  </section>
 
   
 
@@ -344,19 +401,19 @@
         <div class="footer__icon"><i class="ri-facebook-fill"></i></div>
         <span>Facebook</span>
       </a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.linkedin.com/in/jesusalexisrivas/" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-linkedin-fill"></i></div>
         <span>LinkedIn</span>
       </a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.youtube.com/@PasionPorLaTecnologia" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-youtube-fill"></i></div>
         <span>YouTube</span>
       </a>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.instagram.com/esoftpasion?igsh=ZzlsOG1sNjJrejVt" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-instagram-line"></i></div>
         <span>Instagram</span>
       </a>
-      <a href="https://www.tiktok.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.tiktok.com/@esoft.pasion" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-tiktok-fill"></i></div>
         <span>TikTok</span>
       </a>
