@@ -19,6 +19,103 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  function runHeroIntro(){
+  const prefersReduced =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const giant = document.querySelector(".jr-giant");
+  const portraitImg = document.querySelector(".jr-portrait img");
+  const tags = [...document.querySelectorAll(".jr-tags .tag")];
+  const vNameSpan = document.querySelector(".jr-vertical-name span");
+
+  if (!giant || !portraitImg || tags.length === 0 || !vNameSpan) return;
+  if (prefersReduced) return;
+
+  const setInit = (el, styles) => Object.assign(el.style, styles);
+
+  // (opcional pero recomendado) cancelar animaciones previas
+  [giant, portraitImg, ...tags, vNameSpan].forEach(el => {
+    el.getAnimations?.().forEach(a => a.cancel());
+    el.style.opacity = "";
+    el.style.transform = "";
+    el.style.filter = "";
+  });
+
+  /* ---- TU ANIMACIÓN TAL CUAL ---- */
+
+  const cssOpacity = parseFloat(getComputedStyle(giant).opacity || "1");
+  setInit(giant, { opacity: 0, filter: "blur(8px)" });
+  const a1 = giant.animate(
+    [
+      { opacity: 0, filter: "blur(8px)" },
+      { opacity: cssOpacity, filter: "blur(0px)" }
+    ],
+    { duration: 2200, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 200, fill: "forwards" }
+  );
+  a1.addEventListener("finish", () => {
+    giant.style.opacity = "";
+    giant.style.filter = "";
+  });
+
+  setInit(portraitImg, { opacity: 0, transform: "translateY(80px)" });
+  portraitImg.animate(
+    [
+      { opacity: 0, transform: "translateY(80px)" },
+      { opacity: 1, transform: "translateY(0)" }
+    ],
+    { duration: 2500, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 500, fill: "forwards" }
+  );
+
+  const [empresario, autor] = [tags[0], tags[1]];
+
+  if (empresario) {
+    setInit(empresario, { opacity: 0, transform: "translateX(-80px)" });
+    empresario.animate(
+      [
+        { opacity: 0, transform: "translateX(-80px)" },
+        { opacity: 1, transform: "translateX(0)" }
+      ],
+      { duration: 2000, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 1300, fill: "forwards" }
+    );
+  }
+
+  if (autor) {
+    setInit(autor, { opacity: 0, transform: "translateX(80px)" });
+    autor.animate(
+      [
+        { opacity: 0, transform: "translateX(80px)" },
+        { opacity: 1, transform: "translateX(0)" }
+      ],
+      { duration: 2000, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 1600, fill: "forwards" }
+    );
+  }
+
+  setInit(vNameSpan, { opacity: 0, transform: "translateY(-40px)" });
+  vNameSpan.animate(
+    [
+      { opacity: 0, transform: "translateY(-40px)" },
+      { opacity: 1, transform: "translateY(0)" }
+    ],
+    { duration: 1800, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 2100, fill: "forwards" }
+  );
+}
+
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add("is-loaded");
+      document.body.style.overflow = "auto";
+
+      // ✅ ahora sí se ve porque ya no está tapado
+      runHeroIntro();
+    }, 2600);
+  } else {
+    runHeroIntro();
+  }
+});
+
   /* --------------------------------------------------------
      ANIMACIÓN LENTA Y FLUIDA
      -------------------------------------------------------- */
@@ -237,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })();
 
-// Smooth scroll para anclas internas
+// Smooth scroll para anclas internas (fix mobile menu)
 document.addEventListener("click", (e) => {
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
@@ -249,8 +346,27 @@ document.addEventListener("click", (e) => {
   if (!target) return;
 
   e.preventDefault();
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // ✅ Si el menú móvil está abierto, ciérralo primero
+  const wasNavOpen = document.body.classList.contains("nav-open");
+  if (wasNavOpen) {
+    document.body.classList.remove("nav-open");
+    const burger = document.querySelector(".jr-burger");
+    const mobile = document.querySelector(".jr-mobile");
+    if (burger) {
+      burger.setAttribute("aria-expanded", "false");
+      burger.setAttribute("aria-label", "Abrir menú");
+    }
+    if (mobile) mobile.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  // ✅ Espera 1 frame para que el DOM aplique el cierre y luego scrollea
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 });
+
 
 // ==============================
 // Menú hamburguesa móvil
@@ -416,3 +532,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
