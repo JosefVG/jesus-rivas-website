@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jesús Rivas — Autor y Empresario</title>
 
-  <link rel="icon" type="image/png" href="assets/img/logoJesus.png" 
+<link rel="icon" type="image/png" href="assets/img/logoJesus.png" />
 
-
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2301233A'/%3E%3Cpath d='M20 17h24v6H20zm0 12h24v6H20zm0 12h16v6H20z' fill='%23CCEBD2'/%3E%3C/svg%3E" />
+   <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2301233A'/%3E%3Cpath d='M20 17h24v6H20zm0 12h24v6H20zm0 12h16v6H20z' fill='%23CCEBD2'/%3E%3C/svg%3E" />
   <link href="https://fonts.googleapis.com/css2?family=Alata&family=DM+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
@@ -64,7 +63,8 @@
       <a href="#books">MIS LIBROS</a>
       <a href="#contact">CONTACTO</a>
       <a href="#social-section">REDES SOCIALES</a>
-      <a href="#contact" class="jr-nav__cta"> CONSULTORÍA Y MENTORÍA </a>
+      <a href="#contact" class="jr-nav__cta jr-nav__cta--glow" aria-label="Contáctame ahora">Contáctame ahora</a>
+
     </nav>
 
 
@@ -88,7 +88,7 @@
           <a href="#books">MIS LIBROS</a>
           <a href="#contact">CONTACTO</a>
           <a href="#social-section">REDES SOCIALES</a>
-          <a href="#contact">CONSULTORÍA Y MENTORÍA</a>       
+          <a href="#contact" class="jr-cta-mobile" aria-label="Contáctame ahora">CONTÁCTAME AHORA</a>     
          </nav>
       </div>
     </div>
@@ -97,6 +97,7 @@
 
   <div id="top"></div>
 
+ 
 
   <section class="jr-hero" aria-label="Portada Jesús Rivas">
     <h1 class="jr-giant" aria-hidden="true">
@@ -115,6 +116,11 @@
     <div class="jr-vertical-name">
       <span>J E S Ú S&nbsp;&nbsp;R I V A S</span>
     </div>
+
+     <!-- Flecha (solo Hero -> ¿Quién es?) -->
+  <button class="jr-scroll-v" type="button" aria-label="Bajar a ¿Quién es?">
+    <span class="jr-scroll-v__chev" aria-hidden="true"></span>
+  </button>
   </section>
 
 
@@ -378,14 +384,14 @@
           <p>Si prefieres WhatsApp, aquí tienes un acceso rápido.</p>
 
           <a class="jr-btn jr-btn--wa" target="_blank" rel="noopener"
-            href="https://wa.me/5512345678?text=Hola%20Jesús%2C%20quiero%20información%20sobre%20tus%20servicios.">
+            href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar."
             <i class="ri-whatsapp-line" aria-hidden="true"></i>
             WhatsApp
           </a>
 
           <div class="jr-contact__mini">
-            <p><strong>Email empresarial:</strong> contactoJesús@email.com</p>
-            <p><strong>Ubicación:</strong> México</p>
+            <p><strong>Email empresarial:</strong> rivje02@outlook.com</p>
+            <p><strong>Ubicación:</strong> Montecito 38, Piso 33, Nápoles, CDMX</p>
           </div>
         </aside>
       </div>
@@ -397,7 +403,7 @@
     <div class="footer__social">
       <div class="footer__social" id="social-section">
 </div>
-      <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.facebook.com/share/1FDpoXeEHr/?mibextid=wwXIfr" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-facebook-fill"></i></div>
         <span>Facebook</span>
       </a>
@@ -409,18 +415,20 @@
         <div class="footer__icon"><i class="ri-youtube-fill"></i></div>
         <span>YouTube</span>
       </a>
-      <a href="https://www.instagram.com/esoftpasion?igsh=ZzlsOG1sNjJrejVt" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.instagram.com/soyjesusrivas?igsh=ZHlnOXpwYmltZGl3" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-instagram-line"></i></div>
         <span>Instagram</span>
       </a>
-      <a href="https://www.tiktok.com/@esoft.pasion" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://www.tiktok.com/@soyjesusrivas?_r=1&_t=ZS-93tNAPOavzU" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-tiktok-fill"></i></div>
         <span>TikTok</span>
       </a>
-      <a href="https://www.whatsapp.com/" target="_blank" rel="noopener" class="footer__social-item">
+      <a href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar."
+         target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-whatsapp-line"></i></div>
         <span>WhatsApp</span>
       </a>
+
       
     </div>
 
@@ -519,5 +527,9 @@
 </div>
 
   <script src="assets/js/script.js"></script>
+
+     </div>
+  </div>
+</div>
 </body>
 </html>

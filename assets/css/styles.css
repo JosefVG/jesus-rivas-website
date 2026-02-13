@@ -2684,3 +2684,216 @@ body.nav-open .jr-mobile__panel{
     flex: 0 0 220px; /* Fotos un poco más chicas en celular */
   }
 }
+
+/* =========================
+   Flecha V blanca (solo HERO)
+   ========================= */
+
+/* Asegura que el HERO sea referencia */
+.jr-hero{ position: relative; }
+
+/* Botón */
+.jr-hero .jr-scroll-v{
+  position: absolute;
+  left: 50%;
+  bottom: 24px;                 /* debajo del personaje */
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  width: 120px;
+  height: 86px;
+
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* La "V" */
+.jr-hero .jr-scroll-v__chev{
+  position: relative;
+  width: 110px;
+  height: 56px;
+  display: block;
+
+  animation: jrScrollVBounce 1.15s ease-in-out infinite;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
+}
+
+/* Dos brazos */
+.jr-hero .jr-scroll-v__chev::before,
+.jr-hero .jr-scroll-v__chev::after{
+  content: "";
+  position: absolute;
+  top: 16px;
+
+  width: 72px;
+  height: 5px;                  /* ✅ más fino */
+  border-radius: 999px;
+  background: rgba(255,255,255,.96); /* ✅ blanco */
+}
+
+/* Brazo izquierdo */
+.jr-hero .jr-scroll-v__chev::before{
+  left: 0;
+  transform: rotate(40deg);
+  transform-origin: left center;
+}
+
+/* Brazo derecho */
+.jr-hero .jr-scroll-v__chev::after{
+  right: 0;
+  transform: rotate(-40deg);
+  transform-origin: right center;
+}
+
+/* Bounce infinito */
+@keyframes jrScrollVBounce{
+  0%   { transform: translateY(0);   opacity: .85; }
+  50%  { transform: translateY(14px); opacity: 1; }
+  100% { transform: translateY(0);   opacity: .85; }
+}
+
+/* Responsive */
+@media (max-width: 700px){
+  .jr-hero .jr-scroll-v{
+    bottom: 14px;
+    width: 104px;
+    height: 78px;
+  }
+  .jr-hero .jr-scroll-v__chev{
+    width: 96px;
+    height: 50px;
+  }
+  .jr-hero .jr-scroll-v__chev::before,
+  .jr-hero .jr-scroll-v__chev::after{
+    width: 64px;
+    height: 4px;               /* aún más fino en móvil */
+  }
+}
+
+
+
+/* =========================
+   CTA NAV: "Contáctame ahora" (llamativo)
+   ========================= */
+.jr-nav__cta{
+  background: #fff !important;
+  color: var(--brand-deep) !important;
+  border: 1px solid rgba(1, 35, 58, 0.2) !important;
+  text-decoration: none !important;
+
+  padding: 10px 16px !important;
+  border-radius: 999px;
+
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  letter-spacing: .04em;
+
+  box-shadow:
+    0 10px 26px rgba(1,35,58,.16),
+    0 0 0 6px rgba(125,185,166,.18);
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  white-space: nowrap !important;
+}
+
+/* Brillo superior tipo “glass” */
+.jr-nav__cta::before{
+  
+  content: "";
+  position: absolute;
+  inset: -40% -20%;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%);
+  transform: rotate(8deg);
+  pointer-events: none;
+
+  
+}
+
+/* Hover: agranda y se ve más brillante */
+.jr-nav__cta:hover{
+  background: #fff !important;
+  border-color: var(--brand-deep) !important;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(1,35,58,.15) !important;
+}
+
+/* Pulso suave (opcional, llamativo sin ser molesto) */
+.jr-nav__cta--glow{
+  animation: ctaPulse 1.9s ease-in-out infinite;
+}
+@keyframes ctaPulse{
+  0%, 100% { box-shadow: 0 10px 26px rgba(1,35,58,.16), 0 0 0 6px rgba(125,185,166,.18); }
+  50%      { box-shadow: 0 14px 34px rgba(1,35,58,.22), 0 0 0 10px rgba(204,235,210,.22); }
+}
+
+/* Accesibilidad teclado */
+.jr-nav__cta:focus-visible{
+  outline: 3px solid rgba(125,185,166,.45);
+  outline-offset: 4px;
+}
+
+/* =========================
+   CTA móvil: "CONTÁCTAME AHORA"
+   ========================= */
+
+/* Desktop: ocultar este CTA móvil */
+@media (min-width: 901px){
+  .jr-cta-mobile{ display: none !important; }
+}
+
+/* Móvil: mostrar CTA en la barra superior */
+@media (max-width: 900px){
+  .jr-cta-mobile{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* ✅ mismo diseño que tus botones, pero más grande */
+    padding: 12px 18px;
+    border-radius: 999px;
+
+    background: #fff;
+    border: 2px solid var(--brand-deep);
+    color: var(--brand-deep);
+
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: .02em;
+    white-space: nowrap;
+
+    box-shadow: 0 10px 24px rgba(1,35,58,.10);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  }
+
+  .jr-cta-mobile:hover{
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 14px 30px rgba(1,35,58,.14);
+    filter: brightness(1.02);
+  }
+
+  /* Para que quepa en móvil: reduce un poco el espacio del header */
+  .jr-nav{
+    gap: 10px;
+  }
+
+  /* Opcional: que el botón no empuje todo, y el burger siga a la derecha */
+  .jr-cta-mobile{
+    margin-left: auto;
+  }
+}
+
+
+

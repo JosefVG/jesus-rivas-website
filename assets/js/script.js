@@ -534,3 +534,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ==============================
+// Flecha HERO -> #about
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector(".jr-hero .jr-scroll-v");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const target = document.querySelector("#about");
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
