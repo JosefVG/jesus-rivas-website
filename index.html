@@ -63,13 +63,11 @@
       <a href="#books">MIS LIBROS</a>
       <a href="#contact">CONTACTO</a>
       <a href="#social-section">REDES SOCIALES</a>
-      <a href="#contact" class="jr-nav__cta jr-nav__cta--glow" aria-label="Contáctame ahora">Contáctame ahora</a>
-
+      <a href="#contact">CONTÁCTAME AHORA</a>
     </nav>
 
-
-
     <div class="jr-mobile" id="jrMobileMenu" aria-hidden="true">
+      
       <div class="jr-mobile__overlay" data-close="true"></div>
 
       <div class="jr-mobile__panel" role="dialog" aria-modal="true" aria-label="Menú">
@@ -357,7 +355,12 @@
       <p class="jr-lead">Cuéntame qué necesitas y te respondo con la mejor opción.</p>
 
       <div class="jr-contact__grid">
-        <form class="jr-form" onsubmit="return false;">
+       <form class="jr-form" action="https://formsubmit.co/josefmichellvg@gmail.com" method="POST">
+          
+          <input type="hidden" name="_captcha" value="false">
+          
+          <input type="hidden" name="_subject" value="¡Nueva solicitud de cita - Web Jesús Rivas!">
+
           <label>
             Nombre
             <input type="text" name="name" placeholder="Tu nombre" required />
@@ -374,8 +377,8 @@
           </label>
 
           <div class="jr-submit">
-            <button class="jr-btn" type="submit">Enviar</button>
-              <p class="jr-note">Pronto recibirás respuesta.</p>
+            <button class="jr-btn" type="submit">Enviar Solicitud</button>
+            <p class="jr-note">Recibirás respuesta en breve.</p>
           </div>
         </form>
 

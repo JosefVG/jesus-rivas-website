@@ -637,7 +637,7 @@ html, body { overflow-y: auto !important; }
   background: #fff;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 2px solid var(--brand-deep);
+  border: 2px solid var(--brand-deep); 
 
   color: var(--brand-deep);
   font-weight: 700;
@@ -1168,36 +1168,6 @@ html, body { overflow-y: auto !important; }
 @media (max-width: 900px){
   .jr-nav__links{ display: none; }
 }
-
-/* ====== BOTÓN "AGENDEMOS UNA CITA" (NAVBAR) ====== */
-.jr-nav__cta {
-  /* Usamos el mismo estilo base que los enlaces del menú */
-  text-decoration: none;
-  color: var(--brand-deep);
-  font-weight: 700 !important;
-  font-size: 10px !important; /* Mismo tamaño que los otros links */
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  padding: 6px 10px !important; 
-  border-radius: 50px;
-  border: 1px solid transparent; /* Borde transparente igual que los otros */
-  transition: all 0.3s ease;
-  
-  /* Asegura posición a la derecha en escritorio */
-  margin-left: auto; 
-  display: inline-flex; 
-  white-space: nowrap;
-}
-
-/* Efecto Hover (Igual que los otros links) */
-.jr-nav__cta:hover {
-  background: rgba(1, 35, 58, 0.05);
-  backdrop-filter: blur(4px);
-  border-color: rgba(1, 35, 58, 0.1);
-  transform: translateY(-1px);
-  box-shadow: none; /* Quitamos sombras extrañas */
-}
-
 
 
 /* =========================
