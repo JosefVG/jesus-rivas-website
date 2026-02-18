@@ -1616,3 +1616,285 @@ body{
   50%     { transform: translateX(calc(var(--uib-size) * 0.5)) scale(1); }
   99.999% { transform: translateX(calc(var(--uib-size))) scale(0); }
 }
+
+
+.gallery__carousel{
+  position: relative;
+  isolation: isolate; /* crea un nuevo stacking context (evita que overlays ganen) */
+  padding: 10px 64px; /* espacio para flechas */
+}
+
+/* flechas arriba de TODO */
+.gallery__arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;           /* bien alto */
+  pointer-events: auto;  /* clickable */
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 10px 26px rgba(0,0,0,.14);
+
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* posiciones fijas a los lados */
+.gallery__arrow--left{ left: 14px; }
+.gallery__arrow--right{ right: 14px; }
+
+/* El overlay de tus items NO debe tapar las flechas */
+.gallery__item,
+.gallery__overlay{
+  position: relative;
+  z-index: 1;
+}
+
+.gallery__carousel{
+  overflow-x: auto;
+  overflow-y: visible; /* para que no corte flechas */
+}
+
+.gallery__carouselWrap{
+  position: relative;
+  padding: 10px 64px;      /* espacio para flechas */
+}
+
+.gallery__track{
+  display: flex;
+  gap: 26px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 6px 0;
+
+  /* recomendado */
+  scrollbar-width: none;      /* firefox */
+}
+.gallery__track::-webkit-scrollbar{ display:none; } /* chrome */
+
+.gallery__arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 10px 26px rgba(0,0,0,.14);
+
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gallery__arrow--left{ left: 14px; }
+.gallery__arrow--right{ right: 14px; }
+
+/* Para que overlays no tapen clicks */
+.gallery__item, .gallery__overlay{ position: relative; z-index: 1; }
+
+.gallery__wrap {
+  position: relative;
+}
+
+.gallery__arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+
+  cursor: pointer;
+}
+
+.gallery__arrow--left{ left: -18px; }
+.gallery__arrow--right{ right: -18px; }
+
+.gallery__arrow i{
+  font-size: 22px;
+  color: #0b2a3a; /* tu color oscuro */
+}
+
+/* Cuando ya no se pueda mover, se ven igual pero "desactivadas" */
+.gallery__arrow.is-disabled{
+  opacity: .35;
+  cursor: default;
+}
+
+.jr-lightbox{
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(0,0,0,.65);
+  z-index: 9999;
+}
+
+.jr-lightbox.is-open{ display: grid; }
+
+.jr-lightbox__img{
+  max-width: min(92vw, 860px);
+  max-height: 86vh;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+.jr-lightbox__close{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.jr-lightbox__close i{ font-size: 22px; }
+.jr-lightbox__close:hover{ background: rgba(255,255,255,.18); }
+
+
+#jrLightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.60);
+  display: none;
+  z-index: 999999;
+}
+
+#jrLightbox.is-open{ display:block; }
+
+#jrLightboxImg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: min(92vw, 900px);
+  max-height: 82vh;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+#jrLightbox .jr-lightbox__close{
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1000000;
+  display: grid;
+  place-items: center;
+}
+
+/* ✅ Botón cerrar SIEMPRE visible en zoom de libros */
+.book__close{
+  position: fixed;            /* mejor que absolute */
+  top: 16px;
+  right: 16px;
+  z-index: 2000;              /* arriba de todo */
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.45);
+  color: #fff;
+
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.book__close:hover{
+  background: rgba(0,0,0,.50);
+}
+
+.book__close i{
+  font-size: 30px;
+  line-height: 1;
+}
+
+
+/* =========================
+   BOOKS: botón cerrar = igual que Gallery
+   ========================= */
+
+/* Asegura que el overlay/zoom queden arriba del nav (tu nav tiene z-index 99999) */
+.jr-books.is-open .book__overlay{ z-index: 100000 !important; }
+.jr-books.is-open .book__zoom{ z-index: 100001 !important; }
+
+/* ✅ Botón cerrar igual al de #jrLightbox .jr-lightbox__close */
+.jr-books.is-open .book__close{
+  position: fixed !important;
+  top: 18px !important;
+  right: 18px !important;
+
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(255,255,255,.25) !important;
+  background: rgba(255,255,255,.15) !important;
+  color: #fff !important;
+
+  font-size: 34px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+
+  z-index: 1000000 !important; /* arriba de TODO */
+  display: grid !important;
+  place-items: center !important;
+
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.jr-books.is-open .book__close:hover{
+  background: rgba(255,255,255,.18) !important;
+}
+
+/* (opcional) si el icono <i> se ve raro, céntralo */
+.jr-books.is-open .book__close i{
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+

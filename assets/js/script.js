@@ -1,4 +1,36 @@
 // assets/js/script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("galleryTrack");
+  const btnL = document.querySelector(".gallery__arrow--left");
+  const btnR = document.querySelector(".gallery__arrow--right");
+
+  if (!track || !btnL || !btnR) return;
+
+  function updateArrows() {
+    const max = track.scrollWidth - track.clientWidth;
+    const leftDone = track.scrollLeft <= 2;
+    const rightDone = track.scrollLeft >= max - 2;
+
+    btnL.classList.toggle("is-disabled", leftDone);
+    btnR.classList.toggle("is-disabled", rightDone);
+  }
+
+  btnL.addEventListener("click", () => {
+    if (btnL.classList.contains("is-disabled")) return;
+    track.scrollBy({ left: -track.clientWidth * 0.85, behavior: "smooth" });
+  });
+
+  btnR.addEventListener("click", () => {
+    if (btnR.classList.contains("is-disabled")) return;
+    track.scrollBy({ left: track.clientWidth * 0.85, behavior: "smooth" });
+  });
+
+  track.addEventListener("scroll", updateArrows);
+  window.addEventListener("resize", updateArrows);
+  updateArrows();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -321,5 +353,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && bookModal?.classList.contains("is-visible")) closeBookModal();
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lb = document.getElementById("jrLightbox");
+  const lbImg = document.getElementById("jrLightboxImg");
+  const btnClose = lb?.querySelector(".jr-lightbox__close");
+
+  if (!lb || !lbImg || !btnClose) return;
+
+  const targets = document.querySelectorAll(".gallery__item img");
+
+  const open = (src, alt = "") => {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lb.classList.add("is-open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+  };
+
+  const close = () => {
+    lb.classList.remove("is-open");
+    lb.setAttribute("aria-hidden", "true");
+    lbImg.src = "";
+    lbImg.alt = "";
+    document.body.classList.remove("no-scroll");
+  };
+
+  targets.forEach((img) => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(img.currentSrc || img.src, img.alt || "Imagen");
+    });
+  });
+
+  btnClose.addEventListener("click", close);
+
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lb.classList.contains("is-open")) close();
   });
 });

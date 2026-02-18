@@ -229,12 +229,21 @@
     <div class="jr-wrap">
       <div class="gallery__header">
         <h2 class="gallery__title">Galería</h2>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__user">
+        <a href="https://www.instagram.com/soyjesusrivas?igsh=ZHlnOXpwYmltZGl3" target="_blank" rel="noopener" class="gallery__user">
           <i class="ri-instagram-line"></i> @JesusRivas
         </a>
       </div>
 
-      <div class="gallery__carousel">
+        <!-- GALLERY carousel
+      <div class="gallery__carousel" id="galleryCarousel">
+        <button class="gallery__arrow gallery__arrow--left" type="button" aria-label="Anterior">
+          ‹
+        </button>
+
+        <button class="gallery__arrow gallery__arrow--right" type="button" aria-label="Siguiente">
+          ›
+        </button>
+ 
         <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
           <img src="assets/img/maxwellyjesus.jpg" alt="Evento Jesús Rivas" loading="lazy" />
           <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
@@ -259,7 +268,48 @@
           <img src="assets/img/jesusyspen.png" alt="Lifestyle" loading="lazy" />
           <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
         </a>
-      </div>
+      </div> 
+ -->
+
+ <div class="gallery__carouselWrap">
+  <button class="gallery__arrow gallery__arrow--left" type="button" aria-label="Anterior">
+    ‹
+  </button>
+
+  <div class="gallery__track" id="galleryTrack">
+    <!-- TUS ITEMS iguales -->
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+      <img src="assets/img/maxwellyjesus.jpg" alt="Evento Jesús Rivas" />
+      <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+    </a>
+
+     <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusyspen.png" alt="Conferencia" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusalexis.png" alt="Mentoría" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/maxwellyjesus.jpg" alt="Networking" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
+          <img src="assets/img/jesusyspen.png" alt="Lifestyle" loading="lazy" />
+          <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
+        </a>
+
+    
+  </div>
+
+  <button class="gallery__arrow gallery__arrow--right" type="button" aria-label="Siguiente">
+    ›
+  </button>
+</div>
 
       <p class="gallery__footer">Sígueme para más contenido exclusivo</p>
     </div>
@@ -517,7 +567,16 @@
     </div>
   </div>
 
+  
+<div class="jr-lightbox" id="jrLightbox" aria-hidden="true">
+  <button class="jr-lightbox__close" type="button" aria-label="Cerrar imagen">×</button>
+  <img class="jr-lightbox__img" id="jrLightboxImg" alt="" />
+</div>
+
+
   <!-- JS -->
   <script src="assets/js/script.js"></script>
+   
+
 </body>
 </html>
