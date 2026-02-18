@@ -1,4 +1,3 @@
-<!-- Hola Carlos -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,46 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jesús Rivas — Autor y Empresario</title>
 
-<link rel="icon" type="image/png" href="assets/img/logoJesus.png" />
+  <!-- Favicons (sin duplicados) -->
+  <link rel="icon" type="image/png" href="assets/img/logoJesus.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logoJesus.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logoJesus.png?v=2">
+  <link rel="shortcut icon" href="assets/img/logoJesus.png?v=2">
 
-   <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2301233A'/%3E%3Cpath d='M20 17h24v6H20zm0 12h24v6H20zm0 12h16v6H20z' fill='%23CCEBD2'/%3E%3C/svg%3E" />
+  <!-- Fonts + Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Alata&family=DM+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
+
 <body>
-  <div id="preloader" aria-label="Cargando" role="status" aria-live="polite">
-  <div class="preloader__backdrop" aria-hidden="true"></div>
-
+  <!-- PRELOADER -->
+  <div id="preloader" aria-label="Cargando">
   <div class="preloader__content">
-    <!-- Cerradura outline blanca -->
-    <svg class="preloader__lock" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <!-- Arco (se anima) -->
-      <path class="preloader__shackle"
-            d="M22 28v-8c0-6.6 4.9-12 11-12s11 5.4 11 12v8"
-            fill="none" stroke="currentColor" stroke-width="4"
-            stroke-linecap="round" stroke-linejoin="round" />
-      <!-- Cuerpo -->
-      <rect x="16" y="28" width="32" height="28" rx="6"
-            fill="none" stroke="currentColor" stroke-width="4" />
-      <!-- Ojo de llave -->
-      <circle cx="32" cy="42" r="4" fill="none" stroke="currentColor" stroke-width="3" />
-      <path d="M32 46v6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-    </svg>
+    <img class="preloader__img" src="assets/img/loading1.png" alt="Cargando" />
 
-    <!-- Puntos de carga -->
-    <div class="preloader__dots" aria-hidden="true">
-      <span>.</span><span>.</span><span>.</span>
+    <div class="dots" aria-hidden="true">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
     </div>
   </div>
 </div>
 
 
-
+  <!-- NAV -->
   <header class="jr-nav" id="jrNav">
     <a class="jr-nav__brand" href="#top" aria-label="Ir al inicio">
       <img src="assets/img/jesus vertical.png" alt="Jesús Rivas" class="jr-brand__img">
     </a>
+
+    <!-- CTA móvil (barra superior) -->
+    <a class="jr-cta-mobile jr-btn jr-btn--big" href="#contact">CONTÁCTAME AHORA</a>
 
     <button class="jr-burger" type="button"
             aria-label="Abrir menú"
@@ -56,6 +54,7 @@
       </span>
     </button>
 
+    <!-- Menú desktop -->
     <nav class="jr-nav__links" aria-label="Navegación principal">
       <a href="#about">¿QUIÉN ES?</a>
       <a href="#about-brief">SOBRE MÍ</a>
@@ -64,40 +63,36 @@
       <a href="#books">MIS LIBROS</a>
       <a href="#contact">CONTACTO</a>
       <a href="#social-section">REDES SOCIALES</a>
-      <a href="#contact">CONTÁCTAME AHORA</a>
+      <a href="#contact" class="jr-nav__cta jr-nav__cta--lg">CONTÁCTAME AHORA</a>
     </nav>
 
+    <!-- Menú móvil -->
     <div class="jr-mobile" id="jrMobileMenu" aria-hidden="true">
-      
       <div class="jr-mobile__overlay" data-close="true"></div>
 
       <div class="jr-mobile__panel" role="dialog" aria-modal="true" aria-label="Menú">
         <div class="jr-mobile__top">
           <span class="jr-mobile__title">Menú</span>
-          <button class="jr-mobile__close" type="button" aria-label="Cerrar menú" data-close="true">
-            ✕
-          </button>
+          <button class="jr-mobile__close" type="button" aria-label="Cerrar menú" data-close="true">✕</button>
         </div>
 
         <nav class="jr-mobile__links" aria-label="Navegación móvil">
-          <a href="#about">¿QUIÉN ES?</a>
-          <a href="#about-brief">SOBRE MÍ</a>
-          <a href="#cofundador">COFUNDADOR</a>
-          <a href="#gallery">GALERÍA</a>
-          <a href="#books">MIS LIBROS</a>
-          <a href="#contact">CONTACTO</a>
-          <a href="#social-section">REDES SOCIALES</a>
-          <a href="#contact" class="jr-cta-mobile" aria-label="Contáctame ahora">CONTÁCTAME AHORA</a>     
-         </nav>
+          <a href="#about">¿Quién Es?</a>
+          <a href="#about-brief">Sobre Mi</a>
+          <a href="#cofundador">Confundador</a>
+          <a href="#gallery">Galería</a>
+          <a href="#books">Mis Libros</a>
+          <a href="#contact">Contacto</a>
+          <a href="#social-section">Redes Sociales</a>
+          <a href="#contact" class="jr-mobile__cta" aria-label="Contáctame ahora">CONTÁCTAME AHORA</a>
+        </nav>
       </div>
     </div>
   </header>
 
-
   <div id="top"></div>
 
- 
-
+  <!-- HERO -->
   <section class="jr-hero" aria-label="Portada Jesús Rivas">
     <h1 class="jr-giant" aria-hidden="true">
       MI<br/>ESPA<br/>CIO
@@ -105,24 +100,23 @@
 
     <figure class="jr-portrait">
       <img src="assets/img/jesusalexis.png" alt="Jesús Rivas" loading="eager" />
-      </figure>
+    </figure>
 
     <div class="jr-tags">
       <span class="tag tag-1">EMPRESARIO</span>
-      <span class="tag tag-2">Y&nbsp;AUTOR</span>
+      <span class="tag tag-2">AUTOR</span>
     </div>
 
     <div class="jr-vertical-name">
       <span>J E S Ú S&nbsp;&nbsp;R I V A S</span>
     </div>
 
-     <!-- Flecha (solo Hero -> ¿Quién es?) -->
-  <button class="jr-scroll-v" type="button" aria-label="Bajar a ¿Quién es?">
-    <span class="jr-scroll-v__chev" aria-hidden="true"></span>
-  </button>
+    <button class="jr-scroll-v" type="button" aria-label="Bajar a ¿Quién es?">
+      <span class="jr-scroll-v__chev" aria-hidden="true"></span>
+    </button>
   </section>
 
-
+  <!-- ABOUT -->
   <section id="about" class="jr-about" aria-label="Quién es Jesús Rivas">
     <div class="about__container">
       <h2 class="about__title"><span>¿QUIÉN&nbsp;ES</span> JESÚS RIVAS?</h2>
@@ -138,13 +132,13 @@
             20 años de experiencia impulsando a emprendedores, líderes y empresas a
             alcanzar su máximo potencial. Es fundador de iniciativas enfocadas en
             tecnología, liderazgo y desarrollo personal, y autor del libro
-            <em>“El que tenga tienda, que la atienda”.</em> 
+            <em>“El que tenga tienda, que la atienda”.</em>
           </p>
           <p>
             Como cofundador de dos grupos empresariales de renombre, he
             revolucionado la manera en que las empresas operan y se comunican.
           </p>
-          </div>
+        </div>
 
         <figure class="about__img about__img--bottom">
           <img src="assets/img/jesusyspen.png" alt="Jesús Rivas hablando" />
@@ -153,6 +147,7 @@
     </div>
   </section>
 
+  <!-- ABOUT BRIEF -->
   <section id="about-brief" class="jr-brief" aria-label="Resumen de Jesús Rivas">
     <span class="brief__watermark" aria-hidden="true">VISIONARIO</span>
 
@@ -160,78 +155,78 @@
       <h2 class="brief__title">Sobre Jesús Rivas</h2>
 
       <div class="brief__grid">
-        
-        
         <div class="brief__col">
           <div class="brief__header">
             <i class="ri-user-star-line"></i>
           </div>
-          
+
           <p>
             <strong>Autor, empresario y conferencista</strong> innovador y visionario en el
             mundo de los negocios digitales, con una trayectoria marcada por la transformación
-            del sector. 
+            del sector.
           </p>
 
-            
           <p>
             Licenciado en Ciencias de la Computación por la Universidad Central de Venezuela,
             he combinado mi pasión por la tecnología con los negocios.
-            Con una trayectoria marcada por la
-            innovación y la dedicación, me especializo en guiar a emprendedores y líderes
-            empresariales hacia el éxito en el mundo digital.
+            Con una trayectoria marcada por la innovación y la dedicación, me especializo en guiar
+            a emprendedores y líderes empresariales hacia el éxito en el mundo digital.
           </p>
         </div>
 
         <div class="brief__col">
           <div class="brief__header">
-             <i class="ri-lightbulb-flash-line"></i>
+            <i class="ri-lightbulb-flash-line"></i>
           </div>
 
           <p>
             Como empresario, mi enfoque va más allá de simplemente alcanzar el éxito
             empresarial. Mi compromiso se centra en <em>transformar y elevar el mundo digital</em>
-            a través de un liderazgo visionario y humanista. 
-             <p>Mi enfoque ha sido ayudar a clientes a duplicar sus ingresos mediante soluciones de software
-             avanzadas y reconocidas a nivel global.</p>
-             <p> Un innovador y visionario
-            en el mundo de los negocios digitales, con una trayectoria marcada por la
+            a través de un liderazgo visionario y humanista.
+          </p>
+          <p>
+            Mi enfoque ha sido ayudar a clientes a duplicar sus ingresos mediante soluciones de software
+            avanzadas y reconocidas a nivel global.
+          </p>
+          <p>
+            Un innovador y visionario en el mundo de los negocios digitales, con una trayectoria marcada por la
             transformación del sector B2B.
           </p>
-          </p>
-          
         </div>
-        
-<div class="brief__cta-wrap">
-        <a href="#contact" class="brief__cta" aria-label="Contactar a Jesús Rivas">Contactar</a>
-      </div>
 
-      <div class="brief__companies" id="cofundador">
-        <p class="brief__companies-title">COFUNDADOR DE:</p>
-        
-        <div class="brief__logos">
-          <a href="https://nedimi.com/" target="_blank" rel="noopener" class="company-link">
-            <img src="assets/img/nedimi-logo.png" alt="NEDIMI" />
-            <p class="company-desc">
-              Consultoría estratégica y soluciones tecnológicas integrales 
-              para impulsar la transformación digital de las empresas.
-            </p>
-          </a>
-
-          <a href="https://esoftpasion.com/" target="_blank" rel="noopener" class="company-link">
-            <img src="assets/img/esoftpasion-logo.png" alt="eSoftPasion" />
-            <p class="company-desc">
-              Desarrollo de software a la medida con un enfoque innovador, 
-              creando herramientas digitales de alto impacto.
-            </p>
-          </a>
+        <div class="brief__cta-wrap">
+          <a href="#contact" class="brief__cta" aria-label="Contactar a Jesús Rivas">Contactar</a>
         </div>
-      </div>
-      </div> </div> </section>
 
-      <section id="gallery" class="jr-gallery" aria-label="Galería de Instagram">
+        <div class="brief__companies" id="cofundador">
+          <p class="brief__companies-title">COFUNDADOR DE:</p>
+
+          <div class="brief__logos">
+            <a href="https://nedimi.com/" target="_blank" rel="noopener" class="company-link">
+              <img src="assets/img/nedimi-logo.png" alt="NEDIMI" />
+              <p class="company-desc">
+                Consultoría estratégica y soluciones tecnológicas integrales
+                para impulsar la transformación digital de las empresas.
+              </p>
+            </a>
+
+            <a href="https://esoftpasion.com/" target="_blank" rel="noopener" class="company-link">
+              <img src="assets/img/esoftpasion-logo.png" alt="eSoftPasion" />
+              <p class="company-desc">
+                Desarrollo de software a la medida con un enfoque innovador,
+                creando herramientas digitales de alto impacto.
+              </p>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="jr-gallery" aria-label="Galería de Instagram">
     <div class="jr-wrap">
-      
       <div class="gallery__header">
         <h2 class="gallery__title">Galería</h2>
         <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__user">
@@ -240,7 +235,6 @@
       </div>
 
       <div class="gallery__carousel">
-        
         <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
           <img src="assets/img/maxwellyjesus.jpg" alt="Evento Jesús Rivas" loading="lazy" />
           <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
@@ -252,7 +246,7 @@
         </a>
 
         <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="gallery__item">
-          <img src="assets/img/jesusalexis.png" alt="Mentoria" loading="lazy" />
+          <img src="assets/img/jesusalexis.png" alt="Mentoría" loading="lazy" />
           <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
         </a>
 
@@ -265,49 +259,42 @@
           <img src="assets/img/jesusyspen.png" alt="Lifestyle" loading="lazy" />
           <div class="gallery__overlay"><i class="ri-instagram-line"></i></div>
         </a>
-
       </div>
-      
+
       <p class="gallery__footer">Sígueme para más contenido exclusivo</p>
     </div>
   </section>
 
-  
-
+  <!-- BOOKS -->
   <section id="books" class="jr-books" aria-label="Libros de Jesús Rivas">
     <div class="books__container">
       <h2 class="books__title"><span>Mis libros</span> — mi trabajo de autor</h2>
 
       <div class="books__grid">
-        
-        <figure class="book" data-title="El que tenga tienda que no la tienda">
-          <img src="assets/img/libro1.webp" alt="El que tenga tienda que no la tienda" loading="lazy">
-          <figcaption class="book__caption">El que tenga tienda que no la tienda</figcaption>
+        <figure class="book" data-title="El que tenga tienda, que la atienda">
+          <img src="assets/img/libro1.webp" alt="El que tenga tienda, que la atienda" loading="lazy">
+          <figcaption class="book__caption">El que tenga tienda, que la atienda</figcaption>
 
-          <button class="book__cta book__info-btn" 
-            data-title="El que tenga tienda, que la atienda"
-            data-desc="En este libro descubrirás las claves fundamentales para gestionar
-             tu negocio con éxito, evitando los errores comunes que llevan al fracaso. 
-             Una guía práctica para emprendedores que buscan consolidar su empresa.">
+          <button class="book__cta book__info-btn"
+                  data-title="El que tenga tienda, que la atienda"
+                  data-desc="En este libro descubrirás las claves fundamentales para gestionar tu negocio con éxito, evitando errores comunes. Una guía práctica para emprendedores.">
             Información
           </button>
 
-          <a class="book__cta" 
-             href="https://www.amazon.com.mx/que-tenga-tienda-atienda-Spanish/dp/B0CGVN2NMS" 
+          <a class="book__cta"
+             href="https://www.amazon.com.mx/que-tenga-tienda-atienda-Spanish/dp/B0CGVN2NMS"
              target="_blank" rel="noopener">
             Ver en Amazon
           </a>
         </figure>
 
-        <figure class="book" data-title="El que tenga tienda que no la pierda">
-          <img src="assets/img/libro2.png" alt="El que tenga tienda que no la pierda" loading="lazy">
-          <figcaption class="book__caption">El que tenga tienda que no la pierda</figcaption>
+        <figure class="book" data-title="El que tenga tienda, que no la pierda">
+          <img src="assets/img/libro2.png" alt="El que tenga tienda, que no la pierda" loading="lazy">
+          <figcaption class="book__caption">El que tenga tienda, que no la pierda</figcaption>
 
-          <button class="book__cta book__info-btn" 
-            data-title="El que tenga tienda, que no la pierda"
-            data-desc="La continuación esencial que te enseña a mantener y escalar tu 
-            negocio en tiempos de crisis. Aprende estrategias de resiliencia y 
-            crecimiento sostenible para empresas familiares y PyMEs.">
+          <button class="book__cta book__info-btn"
+                  data-title="El que tenga tienda, que no la pierda"
+                  data-desc="La continuación esencial para mantener y escalar tu negocio en tiempos de crisis. Estrategias de resiliencia y crecimiento sostenible.">
             Información
           </button>
 
@@ -322,10 +309,9 @@
           <img src="assets/img/libro3.png" alt="Próximamente" loading="lazy">
           <figcaption class="book__caption">Próximamente</figcaption>
 
-          <button class="book__cta book__info-btn" 
-            data-title="Próximo Lanzamiento"
-            data-desc="Muy pronto llegará mi nueva obra enfocada en el liderazgo digital 
-            y la transformación personal para empresarios del siglo XXI. ¡Espéralo!">
+          <button class="book__cta book__info-btn"
+                  data-title="Próximo Lanzamiento"
+                  data-desc="Muy pronto llegará mi nueva obra enfocada en liderazgo digital y transformación personal. ¡Espéralo!">
             Información
           </button>
 
@@ -333,11 +319,10 @@
             Próximamente
           </a>
         </figure>
-
       </div>
-
     </div>
 
+    <!-- Zoom -->
     <div class="book__overlay" aria-hidden="true"></div>
     <div class="book__zoom" role="dialog" aria-modal="true" aria-label="Vista ampliada de libro">
       <button class="book__close" aria-label="Cerrar vista">
@@ -346,20 +331,17 @@
       <img class="book__zoom-img" src="" alt="">
       <p class="book__zoom-title"></p>
     </div>
-    
   </section>
 
-
+  <!-- CONTACT -->
   <section id="contact" class="jr-section jr-contact" aria-label="Contacto">
     <div class="jr-wrap">
       <h2 class="jr-h2">Contacto</h2>
       <p class="jr-lead">Cuéntame qué necesitas y te respondo con la mejor opción.</p>
 
       <div class="jr-contact__grid">
-       <form class="jr-form" action="https://formsubmit.co/josefmichellvg@gmail.com" method="POST">
-          
+        <form class="jr-form" action="https://formsubmit.co/josefmichellvg@gmail.com" method="POST">
           <input type="hidden" name="_captcha" value="false">
-          
           <input type="hidden" name="_subject" value="¡Nueva solicitud de cita - Web Jesús Rivas!">
 
           <label>
@@ -383,157 +365,159 @@
           </div>
         </form>
 
-        <aside class="jr-contact__box">
-          <h3>Contacto directo</h3>
-          <p>Si prefieres WhatsApp, aquí tienes un acceso rápido.</p>
-
-          <a class="jr-btn jr-btn--wa" target="_blank" rel="noopener"
-            href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar."
+        <aside class="jr-contact__box jr-contact__box--trust">
+          <a class="jr-btn jr-btn--wa jr-btn--wa-big"
+             target="_blank" rel="noopener"
+             href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar.">
             <i class="ri-whatsapp-line" aria-hidden="true"></i>
-            WhatsApp
+            Escríbeme por WhatsApp
           </a>
 
           <div class="jr-contact__mini">
             <p><strong>Email empresarial:</strong> rivje02@outlook.com</p>
             <p><strong>Ubicación:</strong> Montecito 38, Piso 33, Nápoles, CDMX</p>
           </div>
+
+          <div class="jr-map">
+            <iframe
+              title="Ubicación"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Montecito%2038%20Piso%2033%20N%C3%A1poles%20CDMX&output=embed">
+            </iframe>
+          </div>
         </aside>
       </div>
     </div>
   </section>
 
-
-<footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer" id="social-section">
     <div class="footer__social">
-      <div class="footer__social" id="social-section">
-</div>
       <a href="https://www.facebook.com/share/1FDpoXeEHr/?mibextid=wwXIfr" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-facebook-fill"></i></div>
         <span>Facebook</span>
       </a>
+
       <a href="https://www.linkedin.com/in/jesusalexisrivas/" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-linkedin-fill"></i></div>
         <span>LinkedIn</span>
       </a>
+
       <a href="https://www.youtube.com/@PasionPorLaTecnologia" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-youtube-fill"></i></div>
         <span>YouTube</span>
       </a>
+
       <a href="https://www.instagram.com/soyjesusrivas?igsh=ZHlnOXpwYmltZGl3" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-instagram-line"></i></div>
         <span>Instagram</span>
       </a>
+
       <a href="https://www.tiktok.com/@soyjesusrivas?_r=1&_t=ZS-93tNAPOavzU" target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-tiktok-fill"></i></div>
         <span>TikTok</span>
       </a>
+
       <a href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar."
          target="_blank" rel="noopener" class="footer__social-item">
         <div class="footer__icon"><i class="ri-whatsapp-line"></i></div>
         <span>WhatsApp</span>
       </a>
-
-      
     </div>
 
     <div class="footer__links">
-      <a href="#" id="btn-privacy">Aviso de privacidad</a> • 
+      <a href="#" id="btn-privacy">Aviso de privacidad</a> •
       <a href="#" id="btn-policy">Política</a>
     </div>
 
     <p class="footer__copy">© 2026 NEDIMI — Todos los derechos reservados.</p>
   </footer>
 
-
+  <!-- MODAL PRIVACY -->
   <div id="modal-privacy" class="jr-modal" aria-hidden="true">
-  <div class="jr-modal__overlay" data-close="true"></div>
-  
-  <div class="jr-modal__content">
-    <button class="jr-modal__close" data-close="true" aria-label="Cerrar aviso">
-      <i class="ri-close-line"></i>
-    </button>
-    
-    <h3 class="jr-modal__title">Aviso de Privacidad</h3>
-    
-    <div class="jr-modal__body">
-      <p>
-        En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, 
-        <strong>Jesús Rivas</strong> informa que los datos personales proporcionados en este sitio web 
-        (nombre, correo electrónico y teléfono) serán utilizados exclusivamente para fines de contacto, 
-        seguimiento a solicitudes de servicios y envío de información relevante sobre mentorías y conferencias.
-      </p>
-      <p>
-        Sus datos son tratados con estricta confidencialidad y no serán transferidos a terceros sin su consentimiento previo, 
-        salvo las excepciones previstas por la ley. Implementamos medidas de seguridad administrativas, 
-        técnicas y físicas para proteger su información contra daño, pérdida, alteración, destrucción o el uso, 
-        acceso o tratamiento no autorizado.
-      </p>
-      <p>
-        Usted tiene derecho a acceder, rectificar y cancelar sus datos personales, así como a oponerse al tratamiento 
-        de los mismos o revocar el consentimiento que para tal fin nos haya otorgado. Para ejercer estos derechos, 
-        puede enviar una solicitud al correo electrónico de contacto proporcionado en este sitio.
+    <div class="jr-modal__overlay" data-close="true"></div>
+
+    <div class="jr-modal__content">
+      <button class="jr-modal__close" data-close="true" aria-label="Cerrar aviso">
+        <i class="ri-close-line"></i>
+      </button>
+
+      <h3 class="jr-modal__title">Aviso de Privacidad</h3>
+
+      <div class="jr-modal__body">
+        <p>
+          En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares,
+          <strong>Jesús Rivas</strong> informa que los datos personales proporcionados en este sitio web
+          (nombre, correo electrónico y teléfono) serán utilizados exclusivamente para fines de contacto,
+          seguimiento a solicitudes de servicios y envío de información relevante sobre mentorías y conferencias.
+        </p>
+        <p>
+          Sus datos son tratados con estricta confidencialidad y no serán transferidos a terceros sin su consentimiento previo,
+          salvo las excepciones previstas por la ley. Implementamos medidas de seguridad administrativas, técnicas y físicas para
+          proteger su información contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizado.
+        </p>
+        <p>
+          Usted tiene derecho a acceder, rectificar y cancelar sus datos personales, así como a oponerse al tratamiento
+          de los mismos o revocar el consentimiento que para tal fin nos haya otorgado. Para ejercer estos derechos,
+          puede enviar una solicitud al correo electrónico de contacto proporcionado en este sitio.
+        </p>
+      </div>
     </div>
   </div>
-</div>
 
+  <!-- MODAL BOOK INFO -->
+  <div id="modal-book-info" class="jr-modal" aria-hidden="true">
+    <div class="jr-modal__overlay" data-close="true"></div>
 
+    <div class="jr-modal__content">
+      <button class="jr-modal__close" data-close="true" aria-label="Cerrar">
+        <i class="ri-close-line"></i>
+      </button>
 
-<div id="modal-book-info" class="jr-modal" aria-hidden="true">
-  <div class="jr-modal__overlay" data-close="true"></div>
-  
-  <div class="jr-modal__content">
-    <button class="jr-modal__close" data-close="true" aria-label="Cerrar">
-      <i class="ri-close-line"></i>
-    </button>
-    
-    <h3 class="jr-modal__title" id="book-modal-title">Título del Libro</h3>
-    <div class="jr-modal__body">
-      <p id="book-modal-desc">Descripción...</p>
+      <h3 class="jr-modal__title" id="book-modal-title">Título del Libro</h3>
+      <div class="jr-modal__body">
+        <p id="book-modal-desc">Descripción...</p>
+      </div>
     </div>
   </div>
-</div>
-<div id="modal-policy" class="jr-modal" aria-hidden="true">
-  <div class="jr-modal__overlay" data-close="true"></div>
-  
-  <div class="jr-modal__content">
-    <button class="jr-modal__close" data-close="true" aria-label="Cerrar política">
-      <i class="ri-close-line"></i>
-    </button>
-    
-    <h3 class="jr-modal__title">Política de Uso y Términos</h3>
-    
-    <div class="jr-modal__body">
-      <p>
-        Bienvenido al sitio web de <strong>Jesús Rivas</strong>. Al navegar 
-        y utilizar este sitio, usted acepta cumplir con los siguientes términos y 
-        condiciones de uso, los cuales, junto con nuestra política de privacidad, 
-        rigen la relación entre usted y nosotros en relación con este sitio web.
-      </p>
-      <p>
-        <strong>1. Propiedad Intelectual:</strong> Todo el contenido de este sitio 
-        (textos, logotipos, imágenes y material gráfico) es propiedad de Jesús Rivas 
-        o de sus licenciantes y está protegido por las leyes de propiedad intelectual. 
-        Queda prohibida su reproducción sin autorización previa.
-      </p>
-      <p>
-        <strong>2. Uso del Sitio:</strong> La información proporcionada es 
-        para fines generales y de información sobre los servicios de mentoría, 
-        conferencias y libros. Nos reservamos el derecho de modificar el contenido
-         sin previo aviso.
-      </p>
-      <p>
-        <strong>3. Limitación de Responsabilidad:</strong> Aunque nos esforzamos 
-        por mantener la información actualizada, no garantizamos la exactitud 
-        completa o idoneidad de la información para un propósito particular. 
-        El uso de la información de este sitio es bajo su propio riesgo.
-      </p>
-    </div>
-</div>
 
+  <!-- MODAL POLICY -->
+  <div id="modal-policy" class="jr-modal" aria-hidden="true">
+    <div class="jr-modal__overlay" data-close="true"></div>
+
+    <div class="jr-modal__content">
+      <button class="jr-modal__close" data-close="true" aria-label="Cerrar política">
+        <i class="ri-close-line"></i>
+      </button>
+
+      <h3 class="jr-modal__title">Política de Uso y Términos</h3>
+
+      <div class="jr-modal__body">
+        <p>
+          Bienvenido al sitio web de <strong>Jesús Rivas</strong>. Al navegar y utilizar este sitio, usted acepta cumplir
+          con los siguientes términos y condiciones de uso, los cuales, junto con nuestra política de privacidad,
+          rigen la relación entre usted y nosotros en relación con este sitio web.
+        </p>
+        <p>
+          <strong>1. Propiedad Intelectual:</strong> Todo el contenido de este sitio (textos, logotipos, imágenes y material gráfico)
+          es propiedad de Jesús Rivas o de sus licenciantes y está protegido por las leyes de propiedad intelectual.
+          Queda prohibida su reproducción sin autorización previa.
+        </p>
+        <p>
+          <strong>2. Uso del Sitio:</strong> La información proporcionada es para fines generales y de información sobre los servicios
+          de mentoría, conferencias y libros. Nos reservamos el derecho de modificar el contenido sin previo aviso.
+        </p>
+        <p>
+          <strong>3. Limitación de Responsabilidad:</strong> Aunque nos esforzamos por mantener la información actualizada, no garantizamos
+          la exactitud completa o idoneidad de la información para un propósito particular. El uso de la información de este sitio es bajo
+          su propio riesgo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
   <script src="assets/js/script.js"></script>
-
-     </div>
-  </div>
-</div>
 </body>
 </html>
