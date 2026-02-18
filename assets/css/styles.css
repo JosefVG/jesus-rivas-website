@@ -360,20 +360,30 @@ body.nav-open .jr-mobile__panel{ transform: translateX(0); }
 }
 
 /* Foto */
-.jr-portrait{
+.jr-portrait {
   position: relative;
   z-index: 2;
   width: min(650px, 43vw);
   filter: grayscale(100%);
   align-self: end;
-  transform: translateY(-4%);
+  /* Damos un pequeño espacio para que no choque con el borde al subir */
+  margin-bottom: 20px; 
+  pointer-events: none;
 }
-.jr-portrait img{
+.jr-portrait img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
   border-radius: 4px;
+  
+  /* Aplicación de las animaciones */
+  /* La primera dura 1.5s. La segunda es infinita y empieza después de la primera. */
+  animation: 
+    entradaPro 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    flotacionSuave 6s ease-in-out 1.5s infinite;
+  
+  will-change: transform, opacity;
 }
 
 /* Tags */
@@ -1912,3 +1922,22 @@ body{
   line-height: 1 !important;
 }
 
+/* Animación 1: Entrada con desenfoque y subida */
+@keyframes entradaPro {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Animación 2: Movimiento de flotación constante */
+@keyframes flotacionSuave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
