@@ -379,13 +379,14 @@ body.nav-open .jr-mobile__panel{ transform: translateX(0); }
 /* Tags */
 .jr-tags{
   position: absolute;
-  z-index: 3;
+  z-index: 9999;
   left: var(--tags-x-desktop);
   top: var(--tags-y-desktop);
   transform: translateX(-8%);
   display: grid;
   gap: clamp(12px, 1.6vw, 20px);
   width: clamp(220px, 22vw, 320px);
+  pointer-events: auto;
 }
 .tag{
   width: 100%;
@@ -401,8 +402,11 @@ body.nav-open .jr-mobile__panel{ transform: translateX(0); }
   -webkit-backdrop-filter: blur(8px);
 
   text-decoration: none; 
-  display: block; /* Asegura que el área clickeable sea todo el botón */
+  display: flex; /* Asegura que el área clickeable sea todo el botón */
   transition: transform 0.3s ease, filter 0.3s ease;
+  display: block;          /* Para que todo el botón sea clickeable */
+  text-decoration: none;   /* Quita el subrayado de enlace */
+  cursor: pointer;         /* Asegura que aparezca la "manita" */
 }
 
 /*pequeño efecto visual al pasar el mouse */
