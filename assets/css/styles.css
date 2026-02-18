@@ -399,6 +399,16 @@ body.nav-open .jr-mobile__panel{ transform: translateX(0); }
   border-radius: 14px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
+  text-decoration: none; 
+  display: block; /* Asegura que el área clickeable sea todo el botón */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/*pequeño efecto visual al pasar el mouse */
+.tag:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 .tag-1{ background: rgba(125,185,166,.75); }
 .tag-2{ background: rgba(1,35,58,.75); }
