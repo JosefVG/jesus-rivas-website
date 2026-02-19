@@ -400,3 +400,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && lb.classList.contains("is-open")) close();
   });
 });
+
+// Autoplay para el carrete de la galería
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("galleryTrack");
+  const btnR = document.querySelector(".gallery__arrow--right");
+  const intervalTime = 3000; // Tiempo en milisegundos (3 segundos)
+
+  if (!track || !btnR) return;
+
+  let autoplay = setInterval(() => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    
+    // Si llega al final, vuelve al principio
+    if (track.scrollLeft >= maxScroll - 5) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      btnR.click(); // Simula el clic en la flecha derecha
+    }
+  }, intervalTime);
+
+  // Pausar el movimiento si el usuario pone el mouse encima
+  track.addEventListener("mouseenter", () => clearInterval(autoplay));
+  
+  // Reanudar cuando el usuario quita el mouse
+  track.addEventListener("mouseleave", () => {
+    autoplay = setInterval(() => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft >= maxScroll - 5) {
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        btnR.click();
+      }
+    }, intervalTime);
+  });
+});

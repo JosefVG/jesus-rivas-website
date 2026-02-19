@@ -1692,12 +1692,17 @@ body{
   padding: 10px 64px;      /* espacio para flechas */
 }
 
-.gallery__track{
+.gallery__track {
   display: flex;
   gap: 26px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Esto hace que el movimiento sea fluido y no brusco */
   padding: 6px 0;
+  scrollbar-width: none; /* Oculta scrollbar en Firefox */
+}
+
+.gallery__track::-webkit-scrollbar {
+  display: none; /* Oculta scrollbar en Chrome/Safari */
 
   /* recomendado */
   scrollbar-width: none;      /* firefox */
