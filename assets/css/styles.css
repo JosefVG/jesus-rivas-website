@@ -1976,15 +1976,47 @@ body{
 }
 
 /* Mostrar el botón de WhatsApp móvil y ocultar el de desktop en pantallas pequeñas */
+/* Ocultar el WhatsApp del centro en el header móvil */
 @media (max-width: 900px) {
+  .jr-nav .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
+  }
+
+  /* Re-ajustar el header para que el logo y la hamburguesa se repartan el espacio */
+  .jr-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    grid-template-columns: none !important; /* Eliminamos la cuadrícula de 3 si la tenías */
+  }
+}
+  
+ /* --- ESTADO POR DEFECTO (PC / Pantallas grandes) --- */
+
+/* Ocultamos el botón móvil siempre por defecto */
+.jr-cta-mobile.jr-btn--wa-nav {
+  display: none !important;
+}
+
+/* Mostramos el botón de la barra de navegación */
+.jr-nav__links .jr-btn--wa-nav {
+  display: inline-flex !important;
+}
+
+
+/* --- ESTADO MÓVIL (Pantallas menores a 900px) --- */
+@media (max-width: 900px) {
+  
+  /* Ocultamos el botón del menú de escritorio */
   .jr-nav__links .jr-btn--wa-nav {
     display: none !important;
   }
-  
-  .jr-cta-mobile.jr-btn--wa-nav {
-    display: inline-flex !important;
+
+  /* Ocultamos también el del centro si así lo decidiste antes */
+  .jr-nav .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
   }
 }
+
 
 
 /* Animación de entrada para el logo al cargar la página */
