@@ -1952,7 +1952,7 @@ body{
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
-  background-color: #25D366 !important; /* Color oficial WhatsApp */
+  background-color: #01233A !important; /* Color oficial WhatsApp */
   color: white !important;
   border: none !important;
 }
@@ -1963,7 +1963,7 @@ body{
 
 /* Ajuste para el botón dentro del panel móvil */
 .jr-mobile__links a.jr-mobile__cta {
-  background-color: #25D366 !important;
+  background-color: #01233A !important;
   color: white !important;
   justify-content: center !important;
   gap: 10px;
