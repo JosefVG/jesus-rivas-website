@@ -1946,3 +1946,42 @@ body{
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
 }
+
+/* Estilo específico para el botón de WhatsApp en el Nav */
+.jr-btn--wa-nav {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: #25D366 !important; /* Color oficial WhatsApp */
+  color: white !important;
+  border: none !important;
+}
+
+.jr-btn--wa-nav i {
+  font-size: 1.2rem;
+}
+
+/* Ajuste para el botón dentro del panel móvil */
+.jr-mobile__links a.jr-mobile__cta {
+  background-color: #25D366 !important;
+  color: white !important;
+  justify-content: center !important;
+  gap: 10px;
+}
+/* Ocultar el botón de WhatsApp móvil en pantallas grandes */
+@media (min-width: 901px) {
+  .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
+  }
+}
+
+/* Mostrar el botón de WhatsApp móvil y ocultar el de desktop en pantallas pequeñas */
+@media (max-width: 900px) {
+  .jr-nav__links .jr-btn--wa-nav {
+    display: none !important;
+  }
+  
+  .jr-cta-mobile.jr-btn--wa-nav {
+    display: inline-flex !important;
+  }
+}
