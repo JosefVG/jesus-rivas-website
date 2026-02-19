@@ -1985,3 +1985,34 @@ body{
     display: inline-flex !important;
   }
 }
+
+
+/* Animación de entrada para el logo al cargar la página */
+@keyframes logoEntrada {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Aplicación al logo */
+.jr-brand__img {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  animation: logoEntrada 1s ease-out forwards;
+  will-change: transform, filter;
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.jr-nav__brand:hover .jr-brand__img {
+  transform: scale(1.08) rotate(-2deg); /* Se agranda y gira un poco */
+  filter: drop-shadow(0 0 8px rgba(1, 35, 58, 0.2)); /* Crea una sombra suave */
+}
+
+/* Efecto de clic */
+.jr-nav__brand:active .jr-brand__img {
+  transform: scale(0.95); /* Se encoge un poquito al hacer clic */
+}
