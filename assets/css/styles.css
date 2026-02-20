@@ -2048,3 +2048,63 @@ body{
 .jr-nav__brand:active .jr-brand__img {
   transform: scale(0.95); /* Se encoge un poquito al hacer clic */
 }
+
+/* =========================
+   HERO — TABLET FIX (701px a 1100px)
+   (Pegar AL FINAL del CSS)
+   ========================= */
+@media (min-width: 701px) and (max-width: 1100px){
+
+  /* Quita el “aire” y sube el contenido */
+  .jr-hero{
+    height: calc(100svh - var(--jr-nav-h)) !important;
+    min-height: calc(100svh - var(--jr-nav-h)) !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow: hidden !important;
+  }
+
+  /* MI ESPACIO: súbelo y hazlo más visible */
+  .jr-giant{
+    top: 48% !important;
+    left: -6vw !important;
+    transform: translateY(-50%) !important;
+    font-size: clamp(10rem, 30vw, 18rem) !important;
+    opacity: .14 !important;
+  }
+
+  /* Foto: hazla más grande y súbela */
+  .jr-portrait{
+    position: absolute !important;
+    right: 0 !important;
+    bottom: -4vh !important;            /* sube/baja aquí si quieres */
+    width: min(680px, 72vw) !important; /* más grande */
+    margin: 0 !important;
+    transform: translate(4vw, 0) !important;
+    z-index: 3 !important;
+  }
+
+  /* Tags: más arriba para llenar el blanco */
+  .jr-tags{
+    left: 10% !important;
+    top: auto !important;
+    bottom: 22vh !important;            /* súbelo/bájalo aquí */
+    transform: none !important;
+    width: min(360px, 48vw) !important;
+    gap: 14px !important;
+    z-index: 4 !important;
+  }
+
+  /* Nombre vertical: sube un poco */
+  .jr-vertical-name{
+    top: 18% !important;
+    right: 18px !important;
+    transform: none !important;
+    z-index: 4 !important;
+  }
+
+  /* Flecha: que no quede muy abajo */
+  .jr-hero .jr-scroll-v{
+    bottom: 14px !important;
+  }
+}
