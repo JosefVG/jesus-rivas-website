@@ -1692,12 +1692,17 @@ body{
   padding: 10px 64px;      /* espacio para flechas */
 }
 
-.gallery__track{
+.gallery__track {
   display: flex;
   gap: 26px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Esto hace que el movimiento sea fluido y no brusco */
   padding: 6px 0;
+  scrollbar-width: none; /* Oculta scrollbar en Firefox */
+}
+
+.gallery__track::-webkit-scrollbar {
+  display: none; /* Oculta scrollbar en Chrome/Safari */
 
   /* recomendado */
   scrollbar-width: none;      /* firefox */
@@ -1940,4 +1945,106 @@ body{
 @keyframes flotacionSuave {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
+}
+
+/* Estilo específico para el botón de WhatsApp en el Nav */
+.jr-btn--wa-nav {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: #01233A !important; /* Color oficial WhatsApp */
+  color: white !important;
+  border: none !important;
+}
+
+.jr-btn--wa-nav i {
+  font-size: 1.2rem;
+}
+
+/* Ajuste para el botón dentro del panel móvil */
+.jr-mobile__links a.jr-mobile__cta {
+  background-color: #01233A !important;
+  color: white !important;
+  justify-content: center !important;
+  gap: 10px;
+}
+/* Ocultar el botón de WhatsApp móvil en pantallas grandes */
+@media (min-width: 901px) {
+  .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
+  }
+}
+
+/* Mostrar el botón de WhatsApp móvil y ocultar el de desktop en pantallas pequeñas */
+/* Ocultar el WhatsApp del centro en el header móvil */
+@media (max-width: 900px) {
+  .jr-nav .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
+  }
+
+  /* Re-ajustar el header para que el logo y la hamburguesa se repartan el espacio */
+  .jr-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    grid-template-columns: none !important; /* Eliminamos la cuadrícula de 3 si la tenías */
+  }
+}
+  
+ /* --- ESTADO POR DEFECTO (PC / Pantallas grandes) --- */
+
+/* Ocultamos el botón móvil siempre por defecto */
+.jr-cta-mobile.jr-btn--wa-nav {
+  display: none !important;
+}
+
+/* Mostramos el botón de la barra de navegación */
+.jr-nav__links .jr-btn--wa-nav {
+  display: inline-flex !important;
+}
+
+
+/* --- ESTADO MÓVIL (Pantallas menores a 900px) --- */
+@media (max-width: 900px) {
+  
+  /* Ocultamos el botón del menú de escritorio */
+  .jr-nav__links .jr-btn--wa-nav {
+    display: none !important;
+  }
+
+  /* Ocultamos también el del centro si así lo decidiste antes */
+  .jr-nav .jr-cta-mobile.jr-btn--wa-nav {
+    display: none !important;
+  }
+}
+
+
+
+/* Animación de entrada para el logo al cargar la página */
+@keyframes logoEntrada {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Aplicación al logo */
+.jr-brand__img {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  animation: logoEntrada 1s ease-out forwards;
+  will-change: transform, filter;
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.jr-nav__brand:hover .jr-brand__img {
+  transform: scale(1.08) rotate(-2deg); /* Se agranda y gira un poco */
+  filter: drop-shadow(0 0 8px rgba(1, 35, 58, 0.2)); /* Crea una sombra suave */
+}
+
+/* Efecto de clic */
+.jr-nav__brand:active .jr-brand__img {
+  transform: scale(0.95); /* Se encoge un poquito al hacer clic */
 }
