@@ -2108,3 +2108,210 @@ body{
     bottom: 14px !important;
   }
 }
+
+
+/* =========================
+   SECCIÓN GALERÍA (INSTAGRAM STYLE)
+   ========================= */
+.jr-gallery {
+  background: var(--brand-white);
+  padding: 50px 0 clamp(60px, 8vw, 100px) 0;
+  overflow: hidden;
+}
+
+.gallery__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 10px;
+}
+
+.gallery__title {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: clamp(28px, 4.5vw, 40px);
+  color: var(--brand-deep);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Botón del usuario (@JesusRivas) */
+.gallery__user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--brand-teal); /* Color Menta/Teal */
+  transition: color 0.3s ease;
+}
+
+.gallery__user i {
+  font-size: 22px;
+}
+
+.gallery__user:hover {
+  color: var(--brand-deep);
+}
+
+/* --- CARRUSEL --- */
+.gallery__carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Permite scroll horizontal */
+  padding-bottom: 20px; /* Espacio para la barra de scroll */
+  scroll-snap-type: x mandatory; /* Efecto magnético */
+  -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
+  
+  /* Ocultar barra de scroll (opcional, visualmente más limpio) */
+  scrollbar-width: none; /* Firefox */
+}
+
+.gallery__carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* --- ITEMS (FOTOS) --- */
+.gallery__item {
+  position: relative;
+  flex: 0 0 280px; /* Ancho fijo de cada foto */
+  aspect-ratio: 1 / 1; /* Cuadradas como Instagram */
+  border-radius: 20px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Efecto Overlay (Icono Instagram al pasar mouse) */
+.gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 35, 58, 0.4); /* Azul oscuro transparente */
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery__overlay i {
+  color: #fff;
+  font-size: 40px;
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* HOVER STATES */
+.gallery__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.1); /* Zoom suave a la foto */
+}
+
+.gallery__item:hover .gallery__overlay {
+  opacity: 1;
+}
+
+.gallery__item:hover .gallery__overlay i {
+  transform: scale(1); /* Icono aparece con "pop" */
+}
+
+/* Footer pequeño */
+.gallery__footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(1, 35, 58, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .gallery__item {
+    flex: 0 0 220px; /* Fotos un poco más chicas en celular */
+  }
+}
+
+/* =========================
+   GALERÍA: mostrar SOLO 3 tarjetas visibles (manteniendo diseño)
+   ========================= */
+
+/* contenedor del carrusel */
+.gallery__carouselWrap{
+  position: relative;
+}
+
+/* ✅ El track tendrá un ancho máximo para que solo quepan 3 tarjetas */
+.gallery__track{
+  /* 3 tarjetas de 280px + 2 gaps de 26px = 892px */
+  max-width: 892px;
+  margin: 0 auto;              /* centrar */
+}
+
+/* si quieres tarjetas más grandes, ajusta ambos valores:
+   - ancho tarjeta (gallery__item flex-basis)
+   - max-width del track
+*/
+.gallery__item{
+  flex: 0 0 280px;
+  aspect-ratio: 1 / 1;
+}
+
+/* Mantener “sin recorte” */
+.gallery__item img{
+  object-fit: contain;
+  background: #fff;
+}
+
+/* Responsive: en pantallas más pequeñas deja que se adapte */
+@media (max-width: 980px){
+  .gallery__track{
+    max-width: 100%;
+  }
+}
+
+/* =========================
+   GALERÍA — tarjetas llenas (como Imagen 1)
+   ========================= */
+
+/* tarjetas iguales y limpias */
+.gallery__item{
+  flex: 0 0 280px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  background: transparent !important; /* sin marco blanco */
+}
+
+/* la imagen llena la tarjeta */
+.gallery__item img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;       /* ✅ se ve como Imagen 1 */
+  object-position: center !important;
+  background: transparent !important;
+}
+
+/* =========================
+   GALERÍA — solo 3 visibles (manteniendo el look)
+   ========================= */
+.gallery__track{
+  max-width: 892px !important; /* 3*280 + 2*26 */
+  margin: 0 auto !important;
+}
+@media (max-width: 980px){
+  .gallery__track{ max-width: 100% !important; }
+}
+
