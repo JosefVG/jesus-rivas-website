@@ -370,20 +370,21 @@ body.nav-open .jr-mobile__panel{ transform: translateX(0); }
   margin-bottom: 20px; 
   pointer-events: none;
 }
+
 .jr-portrait img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
   border-radius: 4px;
-  
-  /* Aplicación de las animaciones */
-  /* La primera dura 1.5s. La segunda es infinita y empieza después de la primera. */
-  animation: 
-    entradaPro 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-    flotacionSuave 6s ease-in-out 1.5s infinite;
-  
-  will-change: transform, opacity;
+
+  /* ✅ Sin animación aquí para que JS controle todo */
+  animation: none !important;
+  transform: none;
+  opacity: 1;
+  filter: none;
+
+  will-change: auto;
 }
 
 /* Tags */
@@ -1152,7 +1153,7 @@ button.book__cta{ font-family: var(--body-font); cursor:pointer; }
 }
 .jr-contact .jr-form .jr-btn:hover{
   background: rgba(255,255,255,.14);
-  border-color: rgba(255,255,255,.32);
+  border-color: rgba(204,235,210,1);
   box-shadow: 0 14px 32px rgba(0,0,0,.24);
 }
 
@@ -2315,3 +2316,396 @@ body{
   .gallery__track{ max-width: 100% !important; }
 }
 
+
+/* =========================
+   GALLERY — ESTABLE (3 desktop / 2 tablet / 1 mobile)
+   Foto completa sin recorte
+   ========================= */
+.jr-gallery{
+  background: #fff;
+  padding: 50px 0 clamp(60px, 8vw, 100px);
+  overflow: hidden;
+}
+
+.gallery__header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:40px;
+  gap:10px;
+}
+
+.gallery__title{
+  font-family: var(--title-font);
+  font-weight:700;
+  font-size: clamp(28px, 4.5vw, 40px);
+  margin:0;
+  color: var(--brand-deep);
+}
+
+.gallery__user{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:18px;
+  color: var(--brand-teal);
+  transition: color .25s ease;
+}
+.gallery__user i{ font-size:22px; }
+.gallery__user:hover{ color: var(--brand-deep); }
+
+/* Wrapper con flechas */
+.gallery__carouselWrap{
+  position: relative;
+  width: min(1200px, 94%);
+  margin: 0 auto;
+  padding: 0 64px; /* espacio para flechas */
+}
+
+/* Track */
+.gallery__track{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 52px) / 3); /* 3 visibles desktop */
+  gap: 26px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  padding: 8px 0 12px;
+  scrollbar-width: none;
+}
+.gallery__track::-webkit-scrollbar{ display:none; }
+
+/* Tarjeta */
+.gallery__item{
+  display: block;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,.08);
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  /* altura fija para consistencia visual */
+  aspect-ratio: 4 / 5;
+
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* ✅ Foto completa sin recorte */
+.gallery__item img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* importante */
+  object-position: center;
+  background: #fff;         /* relleno cuando la foto no llena */
+  transition: transform .35s ease;
+}
+
+/* Overlay */
+.gallery__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(1,35,58,.35);
+  display:grid;
+  place-items:center;
+  opacity:0;
+  transition: opacity .25s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.gallery__overlay i{
+  color:#fff;
+  font-size: 34px;
+  transform: scale(.9);
+  transition: transform .25s ease;
+}
+
+/* Hover desktop */
+@media (hover:hover){
+  .gallery__item:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0,0,0,.14);
+  }
+  .gallery__item:hover img{
+    transform: scale(1.02); /* leve, sin recortar */
+  }
+  .gallery__item:hover .gallery__overlay{ opacity:1; }
+  .gallery__item:hover .gallery__overlay i{ transform: scale(1); }
+}
+
+/* Flechas */
+.gallery__arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .15s ease, opacity .2s ease, box-shadow .2s ease;
+}
+.gallery__arrow:hover{
+  transform: translateY(-50%) scale(1.04);
+  box-shadow: 0 14px 34px rgba(0,0,0,.16);
+}
+.gallery__arrow--left{ left: 0; }
+.gallery__arrow--right{ right: 0; }
+
+.gallery__arrow i{
+  font-size: 22px;
+  line-height: 1;
+  color: var(--brand-deep);
+}
+
+.gallery__arrow.is-disabled{
+  opacity: .35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gallery__footer{
+  text-align:center;
+  margin-top: 12px;
+  font-size: 14px;
+  color: rgba(1,35,58,.6);
+}
+
+/* =========================
+   TABLET — 2 visibles
+   ========================= */
+@media (max-width: 1024px){
+  .gallery__carouselWrap{
+    width: min(980px, 96%);
+    padding: 0 56px;
+  }
+
+  .gallery__track{
+    grid-auto-columns: calc((100% - 18px) / 2); /* 2 visibles */
+    gap: 18px;
+  }
+
+  .gallery__item{
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+  }
+
+  .gallery__arrow{
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* =========================
+   MOBILE — 1 visible completa
+   ========================= */
+@media (max-width: 700px){
+  .gallery__header{
+    margin-bottom: 26px;
+  }
+
+  .gallery__carouselWrap{
+    width: 100%;
+    padding: 0 52px; /* espacio lateral para flechas */
+  }
+
+  .gallery__track{
+    grid-auto-columns: 100%; /* 1 visible */
+    gap: 0;
+    padding: 6px 0 10px;
+  }
+
+  .gallery__item{
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  }
+
+  .gallery__item img{
+  object-fit: cover !important;      /* llena toda la tarjeta */
+  object-position: center !important;
+  background: transparent !important; /* sin marco blanco */
+}
+
+  .gallery__arrow{
+    width: 48px;
+    height: 48px;
+  }
+
+  .gallery__arrow i{
+    font-size: 20px;
+  }
+
+  .gallery__footer{
+    margin-top: 8px;
+    font-size: 13px;
+  }
+}
+
+/* pantallas muy pequeñas */
+@media (max-width: 380px){
+  .gallery__carouselWrap{ padding: 0 46px; }
+  .gallery__arrow{ width: 44px; height: 44px; }
+  .gallery__arrow i{ font-size: 18px; }
+}
+
+
+/* =========================
+   SOLO HOVER: efecto verde menta
+   (normal = igual que ahora)
+   ========================= */
+
+/* Estado normal: NO cambia nada */
+.jr-btn--wa-big,
+.jr-contact .jr-form .jr-btn{
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease,
+    background .25s ease;
+}
+
+/* Hover menta SUAVE (sin mucho brillo) */
+.jr-btn--wa-big:hover,
+.jr-contact .jr-form .jr-btn:hover{
+  border-color: rgba(125, 185, 166, .55) !important;   /* menta suave */
+  background: rgba(255,255,255,.12) !important;        /* leve cambio */
+  box-shadow: 0 14px 28px rgba(0,0,0,.20) !important;  /* sin glow */
+}
+
+/* Focus teclado (opcional, también suave) */
+.jr-btn--wa-big:focus-visible,
+.jr-contact .jr-form .jr-btn:focus-visible{
+  border-color: rgba(125, 185, 166, .55) !important;
+  box-shadow: 0 0 0 2px rgba(125,185,166,.14) !important;
+}
+
+/* =========================
+   HERO — movimiento suave del personaje
+   ========================= */
+
+   
+
+/* Solo empieza a moverse cuando ya terminó la entrada */
+body.hero-ready .jr-portrait{
+  animation: jrFloatPortrait 4.8s ease-in-out 1.2s infinite;
+  will-change: transform;
+  transform-origin: center bottom;
+}
+
+/* Flotación suave */
+@keyframes jrFloatPortrait{
+  0%   { transform: translate3d(0, 0px, 0); }
+  25%  { transform: translate3d(0, -6px, 0); }
+  50%  { transform: translate3d(0, -12px, 0); }
+  75%  { transform: translate3d(0, -6px, 0); }
+  100% { transform: translate3d(0, 0px, 0); }
+}
+
+/* En móvil que sea más sutil */
+@media (max-width: 700px){
+  body.hero-ready .jr-portrait{
+    animation-duration: 5.4s;
+    animation-delay: 1.0s;
+  }
+
+  @keyframes jrFloatPortrait{
+    0%   { transform: translate3d(0, 0px, 0); }
+    50%  { transform: translate3d(0, -8px, 0); }
+    100% { transform: translate3d(0, 0px, 0); }
+  }
+}
+
+/* Respeta reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.hero-ready .jr-portrait{
+    animation: none !important;
+  }
+}
+
+/* =========================
+   HERO — flotación suave del personaje
+   ========================= */
+body.hero-ready .jr-portrait img{
+  animation: jrFloatCharacter 4.8s ease-in-out infinite;
+  animation-delay: 2.8s; /* espera a que termine la entrada */
+  will-change: transform;
+}
+
+/* flotación suave */
+@keyframes jrFloatCharacter{
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(-4px); }
+  50%  { transform: translateY(-9px); }
+  75%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* móvil: más sutil */
+@media (max-width: 700px){
+  body.hero-ready .jr-portrait img{
+    animation-duration: 5.4s;
+  }
+
+  @keyframes jrFloatCharacter{
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  body.hero-ready .jr-portrait img{
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   HERO FLOAT — personaje se mueve suave
+   ========================================== */
+body.hero-ready .jr-portrait img{
+  animation: jrFloatCharacter 5.2s ease-in-out infinite !important;
+}
+
+@keyframes jrFloatCharacter{
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(-3px); }
+  50%  { transform: translateY(-8px); }
+  75%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 700px){
+  body.hero-ready .jr-portrait img{
+    animation-duration: 5.8s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.hero-ready .jr-portrait img{
+    animation: none !important;
+  }
+}

@@ -1,5 +1,9 @@
 // assets/js/script.js
 
+// =====================================
+// GALERÍA RESPONSIVE (1/2/3 visibles)
+// MISMO DISEÑO, solo comportamiento
+// =====================================
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("galleryTrack");
   const btnL = document.querySelector(".gallery__arrow--left");
@@ -7,28 +11,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!track || !btnL || !btnR) return;
 
-  function updateArrows() {
-    const max = track.scrollWidth - track.clientWidth;
-    const leftDone = track.scrollLeft <= 2;
-    const rightDone = track.scrollLeft >= max - 2;
+  const items = () => Array.from(track.querySelectorAll(".gallery__item"));
+  let currentIndex = 0;
+  let resizeTimer = null;
 
-    btnL.classList.toggle("is-disabled", leftDone);
-    btnR.classList.toggle("is-disabled", rightDone);
+  function visibleCount() {
+    if (window.innerWidth <= 700) return 1;      // celular
+    if (window.innerWidth <= 1024) return 2;     // tableta
+    return 3;                                    // laptop/desktop
   }
 
+  function maxIndex() {
+    return Math.max(0, items().length - visibleCount());
+  }
+
+  function clampIndex(i) {
+    return Math.max(0, Math.min(i, maxIndex()));
+  }
+
+  function itemLeft(index) {
+    const list = items();
+    if (!list[index]) return 0;
+    return list[index].offsetLeft - track.offsetLeft;
+  }
+
+  function goTo(index, smooth = true) {
+    currentIndex = clampIndex(index);
+
+    track.scrollTo({
+      left: itemLeft(currentIndex),
+      behavior: smooth ? "smooth" : "auto"
+    });
+
+    updateArrows();
+  }
+
+  function updateArrows() {
+    const max = maxIndex();
+
+    btnL.classList.toggle("is-disabled", currentIndex <= 0);
+    btnR.classList.toggle("is-disabled", currentIndex >= max);
+  }
+
+  function detectIndexByScroll() {
+    const list = items();
+    if (!list.length) return;
+
+    const left = track.scrollLeft;
+    let nearest = 0;
+    let minDist = Infinity;
+
+    list.forEach((el, i) => {
+      const x = el.offsetLeft - track.offsetLeft;
+      const d = Math.abs(x - left);
+      if (d < minDist) {
+        minDist = d;
+        nearest = i;
+      }
+    });
+
+    currentIndex = clampIndex(nearest);
+    updateArrows();
+  }
+  
+
+  // Flecha izquierda = retrocede 1 foto
   btnL.addEventListener("click", () => {
     if (btnL.classList.contains("is-disabled")) return;
-    track.scrollBy({ left: -track.clientWidth * 0.85, behavior: "smooth" });
+    goTo(currentIndex - 1);
   });
 
+  // Flecha derecha = avanza 1 foto
   btnR.addEventListener("click", () => {
     if (btnR.classList.contains("is-disabled")) return;
-    track.scrollBy({ left: track.clientWidth * 0.85, behavior: "smooth" });
+    goTo(currentIndex + 1);
   });
 
-  track.addEventListener("scroll", updateArrows);
-  window.addEventListener("resize", updateArrows);
-  updateArrows();
+  // Sincroniza al hacer scroll manual/touch
+  let ticking = false;
+  track.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      detectIndexByScroll();
+      ticking = false;
+    });
+  });
+
+  // Ajuste al cambiar tamaño (móvil/tablet/pc)
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      currentIndex = clampIndex(currentIndex);
+      goTo(currentIndex, false);
+    }, 120);
+  });
+
+  // Init
+  goTo(0, false);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,89 +117,170 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==============================
   // HERO intro animation
   // ==============================
-  function runHeroIntro() {
-    if (prefersReduced) return;
+function runHeroIntro() {
+  if (prefersReduced) return;
 
-    const giant = document.querySelector(".jr-giant");
-    const portraitImg = document.querySelector(".jr-portrait img");
-    const tags = [...document.querySelectorAll(".jr-tags .tag")];
-    const vNameSpan = document.querySelector(".jr-vertical-name span");
+  const giant = document.querySelector(".jr-giant");
+  const portraitImg = document.querySelector(".jr-portrait img");
+  const tags = [...document.querySelectorAll(".jr-tags .tag")];
+  const vNameEl = document.querySelector(".jr-vertical-name"); // ✅ no exige span
 
-    if (!giant || !portraitImg || tags.length === 0 || !vNameSpan) return;
+  // ✅ No canceles toda la animación si falta el nombre vertical
+  if (!giant || !portraitImg || tags.length === 0) return;
 
-    const setInit = (el, styles) => Object.assign(el.style, styles);
+  const setInit = (el, styles) => Object.assign(el.style, styles);
 
-    // cancelar animaciones previas
-    [giant, portraitImg, ...tags, vNameSpan].forEach(el => {
-      el.getAnimations?.().forEach(a => a.cancel());
-      el.style.opacity = "";
-      el.style.transform = "";
-      el.style.filter = "";
-    });
+  [giant, portraitImg, ...tags, vNameEl].filter(Boolean).forEach(el => {
+    el.getAnimations?.().forEach(a => a.cancel());
+    el.style.opacity = "";
+    el.style.transform = "";
+    el.style.filter = "";
+  });
 
-    // 1) MI ESPACIO
-    const cssOpacity = parseFloat(getComputedStyle(giant).opacity || "1");
-    setInit(giant, { opacity: 0, filter: "blur(8px)" });
-    const a1 = giant.animate(
-      [{ opacity: 0, filter: "blur(8px)" }, { opacity: cssOpacity, filter: "blur(0px)" }],
-      { duration: 2200, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 200, fill: "forwards" }
-    );
-    a1.addEventListener("finish", () => {
-      giant.style.opacity = "";
-      giant.style.filter = "";
-    });
+  // 1) MI ESPACIO
+  const cssOpacity = parseFloat(getComputedStyle(giant).opacity || "1");
+  setInit(giant, { opacity: "0", filter: "blur(10px)" });
 
-    // 2) Foto
-    setInit(portraitImg, { opacity: 0, transform: "translateY(80px)" });
-    portraitImg.animate(
-      [{ opacity: 0, transform: "translateY(80px)" }, { opacity: 1, transform: "translateY(0)" }],
-      { duration: 2500, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 500, fill: "forwards" }
-    );
-
-    // 3) Tags
-    const [empresario, autor] = [tags[0], tags[1]];
-
-    if (empresario) {
-      setInit(empresario, { opacity: 0, transform: "translateX(-80px)" });
-      empresario.animate(
-        [{ opacity: 0, transform: "translateX(-80px)" }, { opacity: 1, transform: "translateX(0)" }],
-        { duration: 2000, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 1300, fill: "forwards" }
-      );
+  const a1 = giant.animate(
+    [
+      { opacity: 0, filter: "blur(10px)", transform: "translateY(-50%) translateX(-8px)" },
+      { opacity: cssOpacity, filter: "blur(0px)", transform: "translateY(-50%) translateX(0)" }
+    ],
+    {
+      duration: 2400,
+      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+      delay: 120,
+      fill: "forwards"
     }
+  );
 
-    if (autor) {
-      setInit(autor, { opacity: 0, transform: "translateX(80px)" });
-      autor.animate(
-        [{ opacity: 0, transform: "translateX(80px)" }, { opacity: 1, transform: "translateX(0)" }],
-        { duration: 2000, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 1600, fill: "forwards" }
-      );
+  a1.addEventListener("finish", () => {
+    giant.style.opacity = "";
+    giant.style.filter = "";
+    giant.style.transform = ""; // vuelve al CSS base
+  });
+
+  // 2) Foto (entrada)
+  setInit(portraitImg, { opacity: "0", transform: "translateY(80px)" });
+
+  const pAnim = portraitImg.animate(
+    [
+      { opacity: 0, transform: "translateY(80px)" },
+      { opacity: 1, transform: "translateY(0px)" }
+    ],
+    {
+      duration: 2500,
+      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+      delay: 450,
+      fill: "forwards"
     }
+  );
 
-    // 4) Nombre vertical
-    setInit(vNameSpan, { opacity: 0, transform: "translateY(-40px)" });
-    vNameSpan.animate(
-      [{ opacity: 0, transform: "translateY(-40px)" }, { opacity: 1, transform: "translateY(0)" }],
-      { duration: 1800, easing: "cubic-bezier(0.16, 1, 0.3, 1)", delay: 2100, fill: "forwards" }
+  pAnim.addEventListener("finish", () => {
+    portraitImg.style.opacity = "1";
+    portraitImg.style.transform = "translateY(0)";
+    // ✅ activa flotación cuando termina entrada
+    document.body.classList.add("hero-ready");
+  });
+
+  // 3) Tags
+  const [empresario, autor] = [tags[0], tags[1]];
+
+  if (empresario) {
+    setInit(empresario, { opacity: "0", transform: "translateX(-60px)" });
+    empresario.animate(
+      [
+        { opacity: 0, transform: "translateX(-60px)" },
+        { opacity: 1, transform: "translateX(0)" }
+      ],
+      {
+        duration: 1400,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        delay: 1150,
+        fill: "forwards"
+      }
     );
   }
+
+  if (autor) {
+    setInit(autor, { opacity: "0", transform: "translateX(60px)" });
+    autor.animate(
+      [
+        { opacity: 0, transform: "translateX(60px)" },
+        { opacity: 1, transform: "translateX(0)" }
+      ],
+      {
+        duration: 1400,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        delay: 1320,
+        fill: "forwards"
+      }
+    );
+  }
+
+  // 4) Nombre vertical (opcional)
+  if (vNameEl) {
+    setInit(vNameEl, { opacity: "0", transform: "translateY(-24px)" });
+    vNameEl.animate(
+      [
+        { opacity: 0, transform: "translateY(-24px)" },
+        { opacity: 0.65, transform: "translateY(0)" }
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        delay: 1650,
+        fill: "forwards"
+      }
+    );
+  }
+}
 
   // ==============================
   // PRELOADER (1 sola vez)
   // ==============================
-  window.addEventListener("load", () => {
+window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
-  if (!preloader) return;
+  const DURACION_MINIMA = 3500;
 
-  const DURACION_MINIMA = 3500; // <-- cambia aquí (ms)
+  const startHero = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        runHeroIntro();
+      });
+    });
+  };
+
+  if (!preloader) {
+    startHero();
+    return;
+  }
 
   setTimeout(() => {
     preloader.classList.add("is-hidden");
 
+    // ✅ Espera a que termine la transición del preloader (0.5s en tu CSS)
     setTimeout(() => {
       preloader.remove();
-    }, 900); // coincide con la transición del CSS
+      startHero(); // ✅ aquí ya se ve "MI ESPACIO"
+    });
+
   }, DURACION_MINIMA);
+
+  setTimeout(() => {
+  preloader.classList.add("is-hidden");
+
+  setTimeout(() => {
+    runHeroIntro(); // ✅ aquí se dispara
+  }, 120);
+
+  setTimeout(() => {
+    preloader.remove();
+  }, 900);
+}, DURACION_MINIMA);
 });
+
+
 
 
   // ==============================
@@ -364,8 +525,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!lb || !lbImg || !btnClose) return;
 
-  const targets = document.querySelectorAll(".gallery__item img");
-
+  // ✅ EXCLUIR galería: solo abrir lightbox en imágenes que NO estén dentro de .gallery__item
+  const targets = [...document.querySelectorAll("img")].filter(img => !img.closest(".gallery__item"));
   const open = (src, alt = "") => {
     lbImg.src = src;
     lbImg.alt = alt;
