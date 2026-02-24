@@ -409,48 +409,43 @@ window.addEventListener("load", () => {
     [briefTitle, ...briefCols, ...briefParas].forEach(el => el && io.observe(el));
   }
 
-  // ==============================
-  // MIS LIBROS: zoom
-  // ==============================
-  (() => {
-    const section = document.querySelector(".jr-books");
-    if (!section) return;
+ // ==============================
+// MIS LIBROS: clic directo a Amazon (sin zoom)
+// ==============================
+(() => {
+  const section = document.querySelector(".jr-books");
+  if (!section) return;
 
-    const overlay = section.querySelector(".book__overlay");
-    const zoom = section.querySelector(".book__zoom");
-    const zoomImg = section.querySelector(".book__zoom-img");
-    const zoomTitle = section.querySelector(".book__zoom-title");
-    const closeBtn = section.querySelector(".book__close");
-    const books = section.querySelectorAll(".book");
+  const books = section.querySelectorAll(".book");
 
-    const open = (src, title, alt) => {
-      zoomImg.src = src;
-      zoomImg.alt = alt || title || "Libro";
-      zoomTitle.textContent = title || "";
-      section.classList.add("is-open");
-      document.body.style.overflow = "hidden";
-    };
+  books.forEach((book) => {
+    // Busca enlace de Amazon dentro de la tarjeta
+    const amazonLink =
+      book.querySelector('a[href*="amazon."]') ||
+      book.querySelector(".book__amazon") ||
+      book.querySelector("a");
 
-    const close = () => {
-      section.classList.remove("is-open");
-      zoomImg.src = "";
-      document.body.style.overflow = "";
-    };
+    if (!amazonLink) return;
 
-    books.forEach(b => {
-      b.addEventListener("click", (e) => {
-        if (e.target.closest("a") || e.target.closest("button")) return; // no abrir con Amazon ni Info
-        const img = b.querySelector("img");
-        open(img.getAttribute("src"), b.dataset.title || img.alt, img.alt);
-      });
+    // Toda la tarjeta abre Amazon
+    book.addEventListener("click", (e) => {
+      // Si el clic fue en botón de info (si aún existe), no hacer nada aquí
+      if (e.target.closest(".book__info-btn")) return;
+
+      // Si el clic fue directamente en el enlace, deja que el navegador lo maneje
+      if (e.target.closest("a")) return;
+
+      // Abrir Amazon (misma pestaña)
+      window.location.href = amazonLink.href;
+
+      // Si prefieres nueva pestaña, usa esto en vez de la línea de arriba:
+      // window.open(amazonLink.href, "_blank", "noopener");
     });
 
-    overlay?.addEventListener("click", close);
-    closeBtn?.addEventListener("click", close);
-    window.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-    zoom?.addEventListener("click", (e) => { if (e.target === zoom) close(); });
-  })();
-
+    // Cursor para indicar que es clickeable
+    book.style.cursor = "pointer";
+  });
+})();
   // ==============================
   // MODALES (privacidad/política)
   // ==============================
@@ -518,49 +513,7 @@ window.addEventListener("load", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const lb = document.getElementById("jrLightbox");
-  const lbImg = document.getElementById("jrLightboxImg");
-  const btnClose = lb?.querySelector(".jr-lightbox__close");
 
-  if (!lb || !lbImg || !btnClose) return;
-
-  // ✅ EXCLUIR galería: solo abrir lightbox en imágenes que NO estén dentro de .gallery__item
-  const targets = [...document.querySelectorAll("img")].filter(img => !img.closest(".gallery__item"));
-  const open = (src, alt = "") => {
-    lbImg.src = src;
-    lbImg.alt = alt;
-    lb.classList.add("is-open");
-    lb.setAttribute("aria-hidden", "false");
-    document.body.classList.add("no-scroll");
-  };
-
-  const close = () => {
-    lb.classList.remove("is-open");
-    lb.setAttribute("aria-hidden", "true");
-    lbImg.src = "";
-    lbImg.alt = "";
-    document.body.classList.remove("no-scroll");
-  };
-
-  targets.forEach((img) => {
-    img.style.cursor = "zoom-in";
-    img.addEventListener("click", (e) => {
-      e.preventDefault();
-      open(img.currentSrc || img.src, img.alt || "Imagen");
-    });
-  });
-
-  btnClose.addEventListener("click", close);
-
-  lb.addEventListener("click", (e) => {
-    if (e.target === lb) close();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lb.classList.contains("is-open")) close();
-  });
-});
 
 // Autoplay para el carrete de la galería
 document.addEventListener("DOMContentLoaded", () => {
@@ -594,5 +547,117 @@ document.addEventListener("DOMContentLoaded", () => {
         btnR.click();
       }
     }, intervalTime);
+  });
+});
+
+const form = document.getElementById("contact-form");
+const statusText = document.getElementById("status");
+
+
+
+
+// =====================================
+// CONTACTO — EmailJS (SIN PHP) + MODAL ÉXITO
+// =====================================
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const statusText = document.getElementById("status");
+  const submitBtn = document.getElementById("contact-submit-btn");
+
+  // Modal éxito
+  const successModal = document.getElementById("modal-send-success");
+
+  const openSuccessModal = () => {
+    if (!successModal) return;
+    successModal.classList.add("is-visible");
+    successModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeSuccessModal = () => {
+    if (!successModal) return;
+    successModal.classList.remove("is-visible");
+    successModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  // Cerrar modal éxito (X o fondo)
+  successModal?.addEventListener("click", (e) => {
+    if (e.target.closest('[data-close-send="true"]')) {
+      closeSuccessModal();
+    }
+  });
+
+  // ESC para cerrar
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && successModal?.classList.contains("is-visible")) {
+      closeSuccessModal();
+    }
+  });
+
+  if (!form) return;
+
+  let statusResetTimer = null;
+const defaultStatusText = statusText ? statusText.textContent : "";
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = form.querySelector('[name="name"]')?.value.trim();
+    const email = form.querySelector('[name="email"]')?.value.trim();
+    const message = form.querySelector('[name="message"]')?.value.trim();
+
+    if (!name || !email || !message) {
+      if (statusText) statusText.textContent = "❌ Completa todos los campos.";
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.7";
+      submitBtn.style.cursor = "not-allowed";
+      submitBtn.textContent = "Enviando...";
+    }
+    if (statusText) statusText.textContent = "Enviando mensaje...";
+
+    try {
+      await emailjs.sendForm(
+        "service_8bsbd1f",   // ✅ Tu Service ID
+        "template_bwe4n34",    // ✅ Reemplaza con tu Template ID real
+        form
+      );
+
+      if (statusText) {
+  // limpia timer anterior para evitar conflictos
+  if (statusResetTimer) clearTimeout(statusResetTimer);
+
+  statusText.textContent = "✅ Correo enviado correctamente.";
+
+  // después de 5 segundos vuelve al texto anterior
+  statusResetTimer = setTimeout(() => {
+    statusText.textContent = defaultStatusText; 
+    // si prefieres vacío, usa:
+    // statusText.textContent = "";
+  }, 8000);
+}
+
+      form.reset();
+
+      // ✅ Abrir cuadro de éxito
+      openSuccessModal();
+
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      if (statusText) {
+        statusText.textContent = "❌ Error al enviar. Intenta nuevamente en unos minutos.";
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "";
+        submitBtn.style.cursor = "";
+        submitBtn.textContent = "Enviar Solicitud";
+      }
+    }
   });
 });

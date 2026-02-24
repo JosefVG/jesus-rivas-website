@@ -2067,7 +2067,7 @@ body{
 
   /* MI ESPACIO: súbelo y hazlo más visible */
   .jr-giant{
-    top: 48% !important;
+    top: 36% !important;
     left: -6vw !important;
     transform: translateY(-50%) !important;
     font-size: clamp(10rem, 30vw, 18rem) !important;
@@ -2078,8 +2078,8 @@ body{
   .jr-portrait{
     position: absolute !important;
     right: 0 !important;
-    bottom: -4vh !important;            /* sube/baja aquí si quieres */
-    width: min(680px, 72vw) !important; /* más grande */
+    bottom: 0vh !important;            /* sube/baja aquí si quieres */
+    width: min(800px, 100vw) !important; /* más grande */
     margin: 0 !important;
     transform: translate(4vw, 0) !important;
     z-index: 3 !important;
@@ -2719,7 +2719,7 @@ body.hero-ready .jr-portrait img{
 /* tablet */
 @media (min-width: 701px) and (max-width: 1100px){
   .jr-vertical-name{
-    top: 18% !important;
+    top: 15% !important;
     right: 18px !important;
     transform: translateY(0) !important;
   }
@@ -2728,8 +2728,35 @@ body.hero-ready .jr-portrait img{
 /* móvil */
 @media (max-width: 700px){
   .jr-vertical-name{
-    top: 4% !important;
+    top: 18% !important;
     right: 12px !important;
     transform: none !important;
   }
+}
+
+/* =========================
+   MODAL ÉXITO DE ENVÍO
+   ========================= */
+.jr-modal__content--success{
+  width: min(460px, 100%);
+  text-align: center;
+}
+
+.jr-send-ok__icon{
+  width: 74px;
+  height: 74px;
+  margin: 4px auto 14px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(204,235,210,.12);
+  border: 1px solid rgba(204,235,210,.35);
+  box-shadow: 0 10px 28px rgba(0,0,0,.20);
+}
+
+.jr-send-ok__icon i{
+  font-size: 38px;
+  color: var(--brand-mint);
+  line-height: 1;
 }

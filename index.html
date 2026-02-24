@@ -397,62 +397,66 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="jr-section jr-contact" aria-label="Contacto">
-    <div class="jr-wrap">
-      <h2 class="jr-h2">Contacto</h2>
-      <p class="jr-lead">Cuéntame qué necesitas y te respondo con la mejor opción.</p>
+  <!-- CONTACT -->
+<section id="contact" class="jr-section jr-contact" aria-label="Contacto">
+  <div class="jr-wrap">
+    <h2 class="jr-h2">Contacto</h2>
+    <p class="jr-lead">Cuéntame qué necesitas y te respondo con la mejor opción.</p>
 
-      <div class="jr-contact__grid">
-        
-        <form class="jr-form" action="send.php" method="POST">
-  <input type="hidden" name="source" value="Web Jesus Rivas">
+    <div class="jr-contact__grid">
+      
+      <!-- ✅ FORMULARIO EMAILJS (SIN PHP) -->
+      <form class="jr-form" id="contact-form">
+        <!-- variables para EmailJS -->
+        <input type="hidden" name="title" value="Solicitud desde sitio web">
+        <input type="hidden" name="source" value="Web Jesus Rivas">
 
-          <label>
-            Nombre
-            <input type="text" name="name" placeholder="Tu nombre" required />
-          </label>
+        <label>
+          Nombre
+          <input type="text" name="name" placeholder="Tu nombre" required />
+        </label>
 
-          <label>
-            Email
-            <input type="email" name="email" placeholder="ejemplo@email.com" required />
-          </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="ejemplo@email.com" required />
+        </label>
 
-          <label>
-            Mensaje
-            <textarea name="message" rows="5" placeholder="¿Qué te gustaría lograr?" required></textarea>
-          </label>
+        <label>
+          Mensaje
+          <textarea name="message" rows="5" placeholder="¿Qué te gustaría lograr?" required></textarea>
+        </label>
 
-          <div class="jr-submit">
-            <button class="jr-btn" type="submit">Enviar Solicitud</button>
-            <p class="jr-note">Recibirás respuesta en breve.</p>
-          </div>
-        </form>
+        <div class="jr-submit">
+          <button class="jr-btn" id="contact-submit-btn" type="submit">Enviar Solicitud</button>
+          <p class="jr-note" id="status" aria-live="polite">Recibirás respuesta en breve.</p>
+        </div>
+      </form>
 
-        <aside class="jr-contact__box jr-contact__box--trust">
-          <a class="jr-btn jr-btn--wa jr-btn--wa-big"
-             target="_blank" rel="noopener"
-             href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar.">
-            <i class="ri-whatsapp-line" aria-hidden="true"></i>
-            Escríbeme por WhatsApp
-          </a>
+      <aside class="jr-contact__box jr-contact__box--trust">
+        <a class="jr-btn jr-btn--wa jr-btn--wa-big"
+           target="_blank" rel="noopener"
+           href="https://wa.me/525564604183?text=Hola%20Jes%C3%BAs%2C%20me%20gustar%C3%ADa%20conocer%20tus%20servicios%20y%20c%C3%B3mo%20podemos%20trabajar.">
+          <i class="ri-whatsapp-line" aria-hidden="true"></i>
+          Escríbeme por WhatsApp
+        </a>
 
-          <div class="jr-contact__mini">
-            <p><strong>Email empresarial:</strong> rivje02@outlook.com</p>
-            <p><strong>Ubicación:</strong> Montecito 38, Piso 33, Nápoles, CDMX</p>
-          </div>
+        <div class="jr-contact__mini">
+          <p><strong>Email empresarial:</strong> contacto@jesus-rivas.com</p>
+          <p><strong>Ubicación:</strong> Montecito 38, Piso 33, Nápoles, CDMX</p>
+        </div>
 
-          <div class="jr-map">
-            <iframe
-              title="Ubicación"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Montecito%2038%20Piso%2033%20N%C3%A1poles%20CDMX&output=embed">
-            </iframe>
-          </div>
-        </aside>
-      </div>
+        <div class="jr-map">
+          <iframe
+            title="Ubicación"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Montecito%2038%20Piso%2033%20N%C3%A1poles%20CDMX&output=embed">
+          </iframe>
+        </div>
+      </aside>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- FOOTER -->
   <footer class="footer" id="social-section">
@@ -587,9 +591,45 @@
 </div>
 
 
-  <!-- JS -->
-  <script src="assets/js/script.js"></script>
-   
 
+ <!-- TU JS principal -->
+<script src="assets/js/script.js"></script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Inicializar EmailJS -->
+<script>
+  (function () {
+    emailjs.init({
+      publicKey: "WFS1w8BtsCIIZdnJM"
+    });
+  })();
+</script>
+
+
+<!-- MODAL ÉXITO ENVÍO -->
+<div id="modal-send-success" class="jr-modal" aria-hidden="true">
+  <div class="jr-modal__overlay" data-close-send="true"></div>
+
+  <div class="jr-modal__content jr-modal__content--success" role="dialog" aria-modal="true" aria-label="Mensaje enviado">
+    <button class="jr-modal__close" type="button" data-close-send="true" aria-label="Cerrar mensaje">
+      <i class="ri-close-line"></i>
+    </button>
+
+    <div class="jr-send-ok__icon" aria-hidden="true">
+      <i class="ri-check-line"></i>
+    </div>
+
+    <h3 class="jr-modal__title">¡Mensaje enviado!</h3>
+
+    <div class="jr-modal__body">
+      <p style="text-align:center;">
+        Tu solicitud ya fue enviada correctamente.<br>
+        Pronto recibirás una respuesta.
+      </p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
