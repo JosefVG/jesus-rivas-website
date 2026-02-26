@@ -2914,5 +2914,21 @@ header .jr-btn-whatsapp i {
     letter-spacing: .12em !important;
   }
 
+  /* =========================
+   "VISIONARIO" — móvil más apretado (se vea completo)
+   ========================= */
+@media (max-width: 700px){
+
+  .brief__watermark{
+    letter-spacing: .06em !important;     /* ✅ más apretado (antes .15em) */
+    font-size: clamp(3.0rem, 13vw, 5.2rem) !important; /* ✅ un poco más controlado */
+    white-space: nowrap !important;       /* ✅ que NO se rompa en 2 líneas */
+    max-width: 100% !important;
+    overflow: hidden !important;          /* evita que se salga feo */
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* asegura centrado */
+  }
+
+}
   
 
