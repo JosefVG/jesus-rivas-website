@@ -622,8 +622,8 @@ const defaultStatusText = statusText ? statusText.textContent : "";
 
     try {
       await emailjs.sendForm(
-        "service_8bsbd1f",   // ✅ Tu Service ID
-        "template_bwe4n34",    // ✅ Reemplaza con tu Template ID real
+        "service_bbrlvdh",   // ✅ Tu Service ID
+        "template_b43vtb8",    // ✅ Reemplaza con tu Template ID real
         form
       );
 

@@ -2760,3 +2760,120 @@ body.hero-ready .jr-portrait img{
   color: var(--brand-mint);
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .about__title,
+  .about__title span {
+    text-shadow: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__content {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .about__content p {
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brief__col,
+  .jr-brief .brief__col {
+    padding-inline: 22px !important;
+  }
+
+  .jr-brief .brief__title {
+    padding-inline: 18px !important;
+  }
+
+  .brief__col p,
+  .jr-brief .brief__col p {
+    line-height: 1.65;
+  }
+}
+
+/* =========================================
+   TABLET: bajar la imagen pequeña de "¿QUIÉN SOY?"
+   (sin tocar transform del img para no pelear con animaciones)
+   ========================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* contenedor de la sección about */
+  .about__content {
+    align-items: start;
+  }
+
+  /* mueve SOLO el bloque de la imagen pequeña (última imagen del bloque) */
+  .about__content .about__img:last-of-type {
+    margin-top: 20px !important;   /* ajusta: 20 / 24 / 26 / 30 */
+  }
+
+  /* por si la imagen pequeña está dentro de otro wrapper */
+  .about__content .about__img:last-of-type img {
+    display: block;
+  }
+}
+
+/* =========================
+   NAV - letras más grandes
+   ========================= */
+.jr-nav a,
+.jr-nav .nav__link,
+header nav a {
+  font-size: 0.85rem !important;   /* prueba 1.1 / 1.15 / 1.2 */
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Botón WhatsApp (texto + icono) */
+.jr-nav .jr-btn-whatsapp,
+.jr-nav .btn-whatsapp,
+header .jr-btn-whatsapp {
+  font-size: 0.85rem !important;
+  font-weight: 700;
+  padding: 14px 24px; /* opcional: botón un poco más grande */
+}
+
+.jr-nav .jr-btn-whatsapp i,
+.jr-nav .btn-whatsapp i,
+header .jr-btn-whatsapp i {
+  font-size: 1.2em;
+}
+
+/* =========================
+   ABOUT — FIX TABLET (foto 4 personas)
+   ========================= */
+@media (max-width: 1100px){
+  .about__grid{
+    grid-template-columns: 1fr !important;   /* en tablet: 1 columna para que no se apriete */
+    gap: 28px !important;
+    align-items: start !important;
+  }
+
+  /* La primera foto: que no se encoja raro */
+  .about__img--top{
+    max-width: 100% !important;
+    aspect-ratio: 4/5 !important;
+  }
+
+  /* La foto de 4 personas: ya NO flotando a la derecha ni con márgenes negativos */
+  .about__img--bottom{
+    grid-column: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    max-width: 100% !important;
+
+    /* que sea horizontal y se vea bien */
+    aspect-ratio: 16/9 !important;
+  }
+
+  .about__img--bottom img{
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
