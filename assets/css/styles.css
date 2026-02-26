@@ -2877,3 +2877,42 @@ header .jr-btn-whatsapp i {
   }
 }
 
+/* =========================
+   TABLETA = modo móvil (hamburguesa)
+   Breakpoint: <= 1100px
+   ========================= */
+@media (max-width: 1100px){
+
+  /* Oculta menú desktop */
+  .jr-nav__links{ display: none !important; }
+  .jr-nav__cta{ display: none !important; }
+
+  /* Muestra hamburguesa */
+  .jr-burger{ display: inline-flex !important; }
+
+  /* Si quieres el botón whatsapp de arriba como móvil (opcional) */
+  .jr-cta-mobile{ display: inline-flex !important; }
+
+  /* Ajuste del header (más “móvil”) */
+  .jr-nav{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+}
+
+/* Si tu body usa padding-top por el nav fixed, mantenlo en tablet */
+@media (max-width: 1100px){
+  :root{ --jr-nav-h: 72px; } /* ajusta si tu nav mide distinto */
+}
+
+.brief__watermark{
+    top: 28% !important;               /* bájalo */
+    font-size: clamp(5rem, 11vw, 9rem) !important;
+    opacity: .04 !important;           /* más suave */
+    letter-spacing: .12em !important;
+  }
+
+  
+
