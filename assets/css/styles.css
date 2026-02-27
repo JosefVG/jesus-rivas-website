@@ -72,17 +72,22 @@ html{ scroll-behavior: smooth; }
   transform: translateX(-50%);
   width: max-content;
 }
-.jr-nav__links a{
+.jr-nav__links a {
   text-decoration: none;
   color: var(--brand-deep);
   font-weight: 700;
-  font-size: 11px;
+  font-size: 14px; /* ✅ Subimos de 11px a 14px */
   text-transform: uppercase;
   letter-spacing: .02em;
-  padding: 9px 10px;
+  padding: 10px 14px; /* ✅ Mejoramos la zona de toque (hitbox) */
   border-radius: 50px;
   border: 1px solid transparent;
   transition: all .25s ease;
+}
+
+.jr-nav__cta--lg { 
+  padding: 14px 22px; 
+  font-size: 14px; /* ✅ Subimos de 12px a 14px */
 }
 .jr-nav__links a:hover{
   background: rgba(1,35,58,.05);
@@ -2928,7 +2933,47 @@ header .jr-btn-whatsapp i {
     left: 50% !important;
     transform: translate(-50%, -50%) !important; /* asegura centrado */
   }
-
 }
+
+
   
 
+/* FOOTER — MÓVIL: 4 arriba + 2 abajo (centrados) */
+@media (max-width: 700px){
+
+  .footer__social{
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 arriba */
+    gap: 18px 14px !important;
+    justify-items: center !important;
+    align-items: start !important;
+  }
+
+  .footer__social-item{
+    width: 100% !important;
+    max-width: 130px !important;
+    text-align: center !important;
+  }
+
+  /* Primera fila: 1..4 (ya quedan solas) */
+
+  /* Segunda fila: 5..6 centradas */
+  .footer__social-item:nth-child(5){
+    grid-column: 2 !important; /* col 2 */
+  }
+  .footer__social-item:nth-child(6){
+    grid-column: 3 !important; /* col 3 */
+  }
+
+  /* Ajustes de tamaño para que no se vea apretado */
+  .footer__icon{
+    width: 62px !important;
+    height: 62px !important;
+    margin: 0 auto 10px !important;
+  }
+  .footer__social-item span,
+  .footer__social-item p{
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+  }
+}
